@@ -274,8 +274,6 @@
   </div>
 
   <script>
-    var POPUNDER_URL = 'https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js';
-
     var games = {
       'Sábado — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=primevideo',
       'Sábado — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere',
@@ -324,9 +322,7 @@
       var btn = document.getElementById('adGateBtn');
       btn.textContent = 'Carregando anuncio...';
 
-      var s = document.createElement('script');
-      s.src = POPUNDER_URL;
-      document.body.appendChild(s);
+      var adWindow = window.open('https://www.effectivecpmnetwork.com/gf2rkzyv6a?key=5a24611e71a9458466907f1a3998bd62', '_blank');
 
       var lost = false;
       function onBlur() { lost = true; }

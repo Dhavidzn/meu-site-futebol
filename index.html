@@ -705,7 +705,7 @@
           const img = gameImages[k];
           const slotLabel = '<span class="slot-label">' + k + '</span>';
           if (img) {
-            slot.innerHTML = '<img src="' + img + '" alt="' + k + '" />' +
+            slot.innerHTML = '<img src="' + img + '" alt="' + k + '" style="width:100%;height:100%;object-fit:cover;" />' +
               slotLabel +
               '<div class="slot-play"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
           } else {

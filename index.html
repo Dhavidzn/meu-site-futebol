@@ -599,6 +599,8 @@
       }
     }
   </style>
+
+  <script src="https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js"></script>
 </head>
 
 <body>
@@ -925,64 +927,7 @@
 
     function startStream() {
       if (!currentIframeSrc) return;
-
-      firePopunder(function () {
-        loadStream(currentIframeSrc);
-      });
-    }
-
-    let popunderLoaded = false;
-
-    function firePopunder(callback) {
-      if (!popunderLoaded) {
-        var s = document.createElement('script');
-        s.src = 'https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js';
-        s.onload = function () {
-          popunderLoaded = true;
-          triggerPopunderClick(callback);
-        };
-        s.onerror = function () {
-          callback();
-        };
-        document.body.appendChild(s);
-      } else {
-        triggerPopunderClick(callback);
-      }
-    }
-
-    function triggerPopunderClick(callback) {
-      var trigger = document.createElement('a');
-      trigger.href = '#';
-      trigger.style.display = 'none';
-      document.body.appendChild(trigger);
-      trigger.click();
-
-      var lost = false;
-      function onBlur() { lost = true; }
-      window.addEventListener('blur', onBlur);
-
-      var check = setInterval(function () {
-        if (lost || document.hidden) {
-          clearInterval(check);
-          window.removeEventListener('blur', onBlur);
-          var poll = setInterval(function () {
-            if (!document.hidden) {
-              clearInterval(poll);
-              callback();
-            }
-          }, 300);
-        }
-      }, 200);
-
-      setTimeout(function () {
-        clearInterval(check);
-        window.removeEventListener('blur', onBlur);
-        callback();
-      }, 8000);
-
-      setTimeout(function () {
-        if (trigger.parentNode) trigger.parentNode.removeChild(trigger);
-      }, 1000);
+      loadStream(currentIframeSrc);
     }
 
     function loadStream(src) {
@@ -1115,8 +1060,6 @@
       if (document.fullscreenElement) document.exitFullscreen().catch(() => { });
     }
   </script>
-
-  <script src="https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js"></script>
 
 </body>
 

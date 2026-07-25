@@ -5,16 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Placar Ao Vivo — Assistir</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet" />
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: system-ui, sans-serif;
       background: #080808;
       color: #fff;
       -webkit-font-smoothing: antialiased;
@@ -29,7 +25,6 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      height: 100vh;
       padding: 1rem;
     }
 
@@ -51,7 +46,6 @@
       color: rgba(255,255,255,.65);
       font-size: .8125rem;
       font-weight: 500;
-      font-family: 'Inter', sans-serif;
       transition: color .15s;
     }
 
@@ -69,16 +63,6 @@
       flex-direction: column;
       box-shadow: 0 48px 96px rgba(0,0,0,.6);
       position: relative;
-    }
-
-    .player-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: .75rem 1.25rem;
-      background: rgba(14,14,14,.92);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      flex-shrink: 0;
     }
 
     .player-wrap {
@@ -171,12 +155,10 @@
       padding: .375rem;
       border-radius: .5rem;
       transition: background .15s, color .15s;
-      font-family: 'Inter', sans-serif;
     }
 
     .p-ctrl-btn:hover { background: rgba(255,255,255,.08); color: #fff; }
 
-    /* Ad Gate */
     #adGate {
       display: none;
       position: absolute;
@@ -209,7 +191,6 @@
       padding: .85rem 2rem;
       font-size: .9rem;
       font-weight: 700;
-      font-family: 'Inter', sans-serif;
       cursor: pointer;
       transition: transform .15s, box-shadow .15s;
       margin-top: 1.25rem;
@@ -225,7 +206,6 @@
       cursor: pointer;
       background: none;
       border: none;
-      font-family: 'Inter', sans-serif;
     }
 
     .ad-gate-close:hover { color: rgba(255,255,255,.6); }
@@ -295,21 +275,6 @@
 
   <script>
     const games = {
-      'Segunda — Jogo 1': '',
-      'Segunda — Jogo 2': '',
-      'Segunda — Jogo 3': '',
-      'Terça — Jogo 1': '',
-      'Terça — Jogo 2': '',
-      'Terça — Jogo 3': '',
-      'Quarta — Jogo 1': '',
-      'Quarta — Jogo 2': '',
-      'Quarta — Jogo 3': '',
-      'Quinta — Jogo 1': '',
-      'Quinta — Jogo 2': '',
-      'Quinta — Jogo 3': '',
-      'Sexta — Jogo 1': '',
-      'Sexta — Jogo 2': '',
-      'Sexta — Jogo 3': '',
       'Sábado — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=primevideo',
       'Sábado — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere',
       'Sábado — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=globorj',
@@ -338,7 +303,6 @@
 
     function startStream() {
       if (!streamSrc) return;
-
       if (hasWatchedAd()) {
         loadStream();
       } else {
@@ -354,19 +318,15 @@
       overlay.classList.add('hidden');
       let src = streamSrc;
       src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
-      iframe.onload = function () {
-        spinner.classList.remove('active');
-      };
+      iframe.onload = function () { spinner.classList.remove('active'); };
       iframe.src = src;
     }
 
     function watchAd() {
       document.getElementById('adGateBtn').textContent = 'Carregando anuncio...';
-
       var lost = false;
       function onBlur() { lost = true; }
       window.addEventListener('blur', onBlur);
-
       var check = setInterval(function () {
         if (lost || document.hidden) {
           clearInterval(check);
@@ -382,7 +342,6 @@
           }, 300);
         }
       }, 200);
-
       setTimeout(function () {
         clearInterval(check);
         window.removeEventListener('blur', onBlur);
@@ -402,10 +361,6 @@
       }
     }
   </script>
-
-  <script src="https://www.effectivecpmnetwork.com/gf2rkzyv6a?key=5a24611e71a9458466907f1a3998bd62" async></script>
-  <script src="https://pl30524113.effectivecpmnetwork.com/23/f1/99/23f199c4271ee0a7552ab677424f918e.js" async></script>
-  <script src="https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js" async></script>
 </body>
 
 </html>

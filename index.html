@@ -511,6 +511,60 @@
         font-size: .75rem !important;
       }
     }
+    #adGate {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      justify-content: center;
+      align-items: center;
+    }
+    #adGate.active {
+      display: flex;
+    }
+    .ad-gate-card {
+      background: #141414;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1.25rem;
+      padding: 2.5rem 2rem;
+      max-width: 22rem;
+      width: 90%;
+      text-align: center;
+    }
+    .ad-gate-btn {
+      display: inline-block;
+      background: #E53935;
+      color: #fff;
+      border: none;
+      border-radius: .75rem;
+      padding: .85rem 2rem;
+      font-size: .9rem;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      margin-top: 1.25rem;
+    }
+    .ad-gate-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(229,57,53,.35);
+    }
+    .ad-gate-close {
+      display: inline-block;
+      margin-top: .75rem;
+      font-size: .75rem;
+      color: rgba(255,255,255,.3);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+    }
+    .ad-gate-close:hover {
+      color: rgba(255,255,255,.6);
+    }
   </style>
 </head>
 
@@ -730,6 +784,20 @@
     </div>
   </footer>
 
+
+  <!-- ═══════════════ AD GATE ═══════════════ -->
+  <div id="adGate">
+    <div class="ad-gate-card">
+      <div style="width:3rem;height:3rem;border-radius:50%;background:rgba(229,57,53,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+        <span style="font-size:1.5rem;">📺</span>
+      </div>
+      <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Assista um anúncio</h3>
+      <p style="color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.6;">Para assistir a transmissão, assita rapidamente o anúncio abaixo.</p>
+      <button class="ad-gate-btn" id="adGateBtn" onclick="watchAd()">Assistir anúncio</button>
+      <br>
+      <button class="ad-gate-close" onclick="closeAdGate()">Voltar</button>
+    </div>
+  </div>
 
   <!-- ═══════════════ PLAYER MODE ═══════════════ -->
   <div id="playerMode" onclick="if(event.target===this)closePlayer()">
@@ -952,13 +1020,82 @@
       }
     })();
 
+    let adGateLabel = '';
+
     function openPlayer(label) {
+      adGateLabel = label;
+      document.getElementById('adGate').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAdGate() {
+      document.getElementById('adGate').classList.remove('active');
+      document.body.style.overflow = '';
+      adGateLabel = '';
+    }
+
+    function watchAd() {
+      document.getElementById('adGateBtn').textContent = 'Carregando anúncio...';
       if (!document.getElementById('popunder-ad')) {
         var s = document.createElement('script');
         s.src = 'https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js';
         s.id = 'popunder-ad';
+        s.onload = function () {
+          var btn = document.createElement('a');
+          btn.href = '#';
+          btn.id = 'popunder-trigger';
+          btn.style.display = 'none';
+          document.body.appendChild(btn);
+          btn.click();
+          waitForAdComplete();
+        };
         document.body.appendChild(s);
+      } else {
+        var existing = document.getElementById('popunder-trigger');
+        if (!existing) {
+          var btn = document.createElement('a');
+          btn.href = '#';
+          btn.id = 'popunder-trigger';
+          btn.style.display = 'none';
+          document.body.appendChild(btn);
+        }
+        document.getElementById('popunder-trigger').click();
+        waitForAdComplete();
       }
+    }
+
+    function waitForAdComplete() {
+      var lost = false;
+      function onBlur() { lost = true; }
+      window.addEventListener('blur', onBlur);
+      var check = setInterval(function () {
+        if (lost || document.hidden) {
+          clearInterval(check);
+          window.removeEventListener('blur', onBlur);
+          var poll = setInterval(function () {
+            if (!document.hidden) {
+              clearInterval(poll);
+              document.getElementById('adGateBtn').textContent = 'Assistir anúncio';
+              document.getElementById('adGate').classList.remove('active');
+              document.body.style.overflow = '';
+              showPlayer(adGateLabel);
+              adGateLabel = '';
+            }
+          }, 300);
+        }
+      }, 200);
+      setTimeout(function () {
+        clearInterval(check);
+        window.removeEventListener('blur', onBlur);
+        document.getElementById('adGateBtn').textContent = 'Assistir anúncio';
+        document.getElementById('adGate').classList.remove('active');
+        document.body.style.overflow = '';
+        showPlayer(adGateLabel);
+        adGateLabel = '';
+      }, 8000);
+    }
+
+    function showPlayer(label) {
       currentGameLabel = label;
       currentIframeSrc = games[label] || '';
       const iframe = document.getElementById('playerFrame');

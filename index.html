@@ -1116,12 +1116,6 @@
     function watchAd() {
       document.getElementById('adGateBtn').textContent = 'Carregando anuncio...';
 
-      var trigger = document.createElement('a');
-      trigger.href = '#';
-      trigger.style.display = 'none';
-      document.body.appendChild(trigger);
-      trigger.click();
-
       var lost = false;
       function onBlur() { lost = true; }
       window.addEventListener('blur', onBlur);
@@ -1152,10 +1146,6 @@
         showPlayer(adGateLabel);
         adGateLabel = '';
       }, 8000);
-
-      setTimeout(function () {
-        if (trigger.parentNode) trigger.parentNode.removeChild(trigger);
-      }, 1000);
     }
 
     function showPlayer(label) {

@@ -267,23 +267,70 @@
       transform: scale(1.1);
     }
 
+    .slot-label {
+      display: none;
+    }
+
     @media (max-width: 768px) {
+      .hero-section {
+        min-height: 70vh;
+        background-position: center 30%;
+      }
+
       .hero-title {
-        font-size: clamp(2rem, 9vw, 3rem);
+        font-size: clamp(1.75rem, 8vw, 2.5rem);
       }
 
       .hero-content {
-        padding: 3rem 1.25rem;
+        padding: 2rem 1.25rem;
         text-align: left;
       }
 
       .section-title {
-        font-size: clamp(1.5rem, 6vw, 2rem);
+        font-size: clamp(1.25rem, 6vw, 1.75rem);
       }
 
       .game-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: .5rem;
+        grid-template-columns: 1fr;
+        gap: .75rem;
+      }
+
+      .game-slot {
+        aspect-ratio: auto;
+        height: 4.5rem;
+        border-radius: .75rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 1rem;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid rgba(255, 255, 255, .08);
+      }
+
+      .game-slot img {
+        height: 100%;
+        width: auto;
+        border-radius: .75rem;
+        object-fit: cover;
+      }
+
+      .slot-play {
+        position: static;
+        pointer-events: auto;
+        opacity: .7;
+        flex-shrink: 0;
+        margin-left: auto;
+      }
+
+      .slot-label {
+        display: block;
+        font-size: .875rem;
+        font-weight: 600;
+        color: #fff;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .comp-card {
@@ -292,8 +339,12 @@
     }
 
     @media (max-width: 480px) {
+      .hero-section {
+        min-height: 60vh;
+      }
+
       .hero-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
       }
 
       .nav-links {
@@ -652,11 +703,14 @@
           const slot = document.createElement('div');
           slot.className = 'game-slot';
           const img = gameImages[k];
+          const slotLabel = '<span class="slot-label">' + k + '</span>';
           if (img) {
-            slot.innerHTML = '<img src="' + img + '" alt="' + k + '" style="width:100%;height:100%;object-fit:cover;border-radius:.75rem;" />' +
-              '<div class="slot-play"><svg width="65" height="65" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
+            slot.innerHTML = '<img src="' + img + '" alt="' + k + '" />' +
+              slotLabel +
+              '<div class="slot-play"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
           } else {
-            slot.innerHTML = '<div class="slot-play"><svg width="65" height="65" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
+            slot.innerHTML = slotLabel +
+              '<div class="slot-play"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
           }
           if (games[k]) {
             slot.onclick = (function (label) {

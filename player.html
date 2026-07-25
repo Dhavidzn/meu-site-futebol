@@ -293,21 +293,9 @@
 
     document.getElementById('gameTitle').textContent = jogoKey;
 
-    function hasWatchedAd() {
-      try { return localStorage.getItem('ad_watched') === '1'; } catch(e) { return true; }
-    }
-
-    function markAdWatched() {
-      try { localStorage.setItem('ad_watched', '1'); } catch(e) {}
-    }
-
     function startStream() {
       if (!streamSrc) return;
-      if (hasWatchedAd()) {
-        loadStream();
-      } else {
-        document.getElementById('adGate').classList.add('active');
-      }
+      document.getElementById('adGate').classList.add('active');
     }
 
     function loadStream() {
@@ -323,10 +311,15 @@
     }
 
     function watchAd() {
-      document.getElementById('adGateBtn').textContent = 'Carregando anuncio...';
+      var btn = document.getElementById('adGateBtn');
+      btn.textContent = 'Carregando anuncio...';
+
+      window.open('https://www.effectivecpmnetwork.com/gf2rkzyv6a?key=5a24611e71a9458466907f1a3998bd62', '_blank');
+
       var lost = false;
       function onBlur() { lost = true; }
       window.addEventListener('blur', onBlur);
+
       var check = setInterval(function () {
         if (lost || document.hidden) {
           clearInterval(check);
@@ -334,19 +327,18 @@
           var poll = setInterval(function () {
             if (!document.hidden) {
               clearInterval(poll);
-              markAdWatched();
-              document.getElementById('adGateBtn').textContent = 'Assistir anuncio';
+              btn.textContent = 'Assistir anuncio';
               document.getElementById('adGate').classList.remove('active');
               loadStream();
             }
           }, 300);
         }
       }, 200);
+
       setTimeout(function () {
         clearInterval(check);
         window.removeEventListener('blur', onBlur);
-        markAdWatched();
-        document.getElementById('adGateBtn').textContent = 'Assistir anuncio';
+        btn.textContent = 'Assistir anuncio';
         document.getElementById('adGate').classList.remove('active');
         loadStream();
       }, 8000);
@@ -361,6 +353,8 @@
       }
     }
   </script>
+
+  <script src="https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js"></script>
 </body>
 
 </html>

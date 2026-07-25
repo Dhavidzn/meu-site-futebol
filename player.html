@@ -249,7 +249,7 @@
   <div class="player-page">
 
     <div class="player-top-bar">
-      <a href="index.html">‹ Voltar</a>
+      <a href="javascript:history.back()">‹ Voltar</a>
       <div style="display:flex;align-items:center;gap:.5rem;">
         <div style="width:.5rem;height:.5rem;border-radius:50%;background:#E53935;box-shadow:0 0 8px rgba(229,57,53,.5);"></div>
         <span style="font-size:.6875rem;font-weight:700;letter-spacing:.1em;color:#E53935;">AO VIVO</span>
@@ -268,7 +268,7 @@
           <p style="color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.6;">Para assistir a transmissão, assita rapidamente o anuncio abaixo.</p>
           <button class="ad-gate-btn" id="adGateBtn" onclick="watchAd()">Assistir anuncio</button>
           <br>
-          <button class="ad-gate-close" onclick="closeAdGate()">Fechar aba e voltar</button>
+          <button class="ad-gate-close" onclick="history.back()">Voltar</button>
         </div>
       </div>
 
@@ -358,10 +358,6 @@
         spinner.classList.remove('active');
       };
       iframe.src = src;
-    }
-
-    function closeAdGate() {
-      window.close();
     }
 
     function watchAd() {

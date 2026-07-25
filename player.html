@@ -227,19 +227,38 @@
     .player-card:fullscreen {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       background: #000;
+      width: 100vw;
+      height: 100vh;
     }
 
     .player-card:fullscreen .player-wrap {
+      flex: 1;
+      width: 100%;
       max-width: 100%;
-      max-height: 80vh;
-      margin: 0 auto;
+      max-height: none;
+      aspect-ratio: unset;
+      margin: 0;
     }
 
-    .player-card:fullscreen .player-bar,
+    .player-card:fullscreen .player-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background: rgba(0,0,0,.7);
+      border-radius: 0;
+    }
+
     .player-card:fullscreen .player-controls {
-      background: rgba(0,0,0,.85);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background: rgba(0,0,0,.7);
+      border-radius: 0;
     }
   </style>
 </head>

@@ -274,7 +274,9 @@
   </div>
 
   <script>
-    const games = {
+    var POPUNDER_URL = 'https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js';
+
+    var games = {
       'Sábado — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=primevideo',
       'Sábado — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere',
       'Sábado — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=globorj',
@@ -287,17 +289,23 @@
       'Domingo — Jogo 7': 'https://sinalpublicoetv.vercel.app/?id=globorj'
     };
 
-    const params = new URLSearchParams(window.location.search);
-    const jogoKey = params.get('jogo') || '';
-    const streamSrc = games[jogoKey] || '';
+    var params = new URLSearchParams(window.location.search);
+    var jogoKey = params.get('jogo') || '';
+    var streamSrc = games[jogoKey] || '';
 
     document.getElementById('gameTitle').textContent = jogoKey;
 
-    var adLoaded = false;
+    var adWatched = false;
+
+    document.getElementById('adGate').classList.add('active');
 
     function startStream() {
       if (!streamSrc) return;
-      document.getElementById('adGate').classList.add('active');
+      if (adWatched) {
+        loadStream();
+      } else {
+        document.getElementById('adGate').classList.add('active');
+      }
     }
 
     function loadStream() {
@@ -316,29 +324,13 @@
       var btn = document.getElementById('adGateBtn');
       btn.textContent = 'Carregando anuncio...';
 
-      if (!adLoaded) {
-        var s = document.createElement('script');
-        s.src = 'https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js';
-        s.onload = function () {
-          adLoaded = true;
-          triggerPopunder();
-        };
-        document.body.appendChild(s);
-      } else {
-        triggerPopunder();
-      }
-    }
+      var s = document.createElement('script');
+      s.src = POPUNDER_URL;
+      document.body.appendChild(s);
 
-    function triggerPopunder() {
-      var btn = document.getElementById('adGateBtn');
       var lost = false;
       function onBlur() { lost = true; }
       window.addEventListener('blur', onBlur);
-
-      var links = document.querySelectorAll('a[href]');
-      if (links.length > 0) {
-        links[0].click();
-      }
 
       var check = setInterval(function () {
         if (lost || document.hidden) {
@@ -347,6 +339,7 @@
           var poll = setInterval(function () {
             if (!document.hidden) {
               clearInterval(poll);
+              adWatched = true;
               btn.textContent = 'Assistir anuncio';
               document.getElementById('adGate').classList.remove('active');
               loadStream();
@@ -358,6 +351,7 @@
       setTimeout(function () {
         clearInterval(check);
         window.removeEventListener('blur', onBlur);
+        adWatched = true;
         btn.textContent = 'Assistir anuncio';
         document.getElementById('adGate').classList.remove('active');
         loadStream();

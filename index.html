@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Futebol todo dia</title>
+  <title>Placar Ao Vivo — Resultados em tempo real</title>
   <meta name="google-site-verification" content="3uKwHA9zdvdntZ8tE2uO928Gsc3oMjpyEf05S2GKuBk" />
   <meta name="description" content="Acompanhe resultados de futebol em tempo real. Placar Ao Vivo." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet" />
+  <script src="https://pl30524113.effectivecpmnetwork.com/23/f1/99/23f199c4271ee0a7552ab677424f918e.js" async></script>
 
   <style>
     *,
@@ -208,17 +209,9 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
       overflow: hidden;
       padding-top: 3.5rem;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: transparent;
-      pointer-events: none;
-      opacity: 0;
+      background: url('imagens/fundo.png') center/cover no-repeat;
     }
 
     .hero-content {
@@ -234,18 +227,6 @@
       font-weight: 900;
       letter-spacing: -.045em;
       line-height: 1.05;
-    }
-
-    .hero-video-bg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 230vh;
-      height: 140vh;
-      opacity: .35;
-      pointer-events: none;
-      border: none;
     }
 
     /* Game grid */
@@ -287,298 +268,85 @@
       transform: scale(1.1);
     }
 
-    /* Player */
-    #playerMode {
+    .slot-label {
       display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(8, 8, 8, .92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 100;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
     }
 
-    #playerMode.active {
-      display: flex;
-    }
-
-    .player-card {
-      width: 100%;
-      max-width: 56rem;
-      background: #0e0e0e;
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 1.25rem;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 48px 96px rgba(0, 0, 0, .6);
-    }
-
-    .player-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: .75rem 1.25rem;
-      background: rgba(14, 14, 14, .92);
-      border-bottom: 1px solid rgba(255, 255, 255, .06);
-      flex-shrink: 0;
-    }
-
-    .player-wrap {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
-    }
-
-    .player-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .player-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, .55);
-      cursor: pointer;
-      transition: opacity .25s;
-      z-index: 5;
-    }
-
-    .player-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .loading-spinner {
-      position: absolute;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, .7);
-      z-index: 4;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .loading-spinner.active {
-      display: flex;
-    }
-
-    .spinner-ring {
-      width: 3rem;
-      height: 3rem;
-      border: 3px solid rgba(255, 255, 255, .1);
-      border-top-color: #E53935;
-      border-radius: 50%;
-      animation: spin .8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .play-circle {
-      width: 5rem;
-      height: 5rem;
-      border-radius: 50%;
-      background: #E53935;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 40px rgba(229, 57, 53, .4);
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    .player-overlay:hover .play-circle {
-      transform: scale(1.08);
-      box-shadow: 0 0 60px rgba(229, 57, 53, .55);
-    }
-
-    .player-controls {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      padding: .75rem 1.25rem;
-      background: rgba(14, 14, 14, .92);
-      border-top: 1px solid rgba(255, 255, 255, .06);
-      flex-shrink: 0;
-    }
-
-    .quality-select {
-      background: rgba(255, 255, 255, .06);
-      border: 1px solid rgba(255, 255, 255, .1);
-      border-radius: .5rem;
-      color: rgba(255, 255, 255, .7);
-      font-size: .75rem;
-      font-family: 'Inter', sans-serif;
-      padding: .375rem .625rem;
-      cursor: pointer;
-      outline: none;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    .quality-select:hover {
-      border-color: rgba(255, 255, 255, .2);
-      color: #fff;
-    }
-
-    .quality-select option {
-      background: #1a1a1a;
-      color: #fff;
-    }
-
-    .p-ctrl-btn {
-      background: none;
-      border: none;
-      color: rgba(255, 255, 255, .65);
-      font-size: 1rem;
-      cursor: pointer;
-      padding: .375rem;
-      border-radius: .5rem;
-      transition: background .15s, color .15s;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .p-ctrl-btn:hover {
-      background: rgba(255, 255, 255, .08);
-      color: #fff;
-    }
-
-    /* Popup Overlay */
-    #popupOverlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-
-    #popupOverlay.active {
-      display: flex;
-    }
-
-    .popup-card {
-      width: 100%;
-      max-width: 42rem;
-      background: #0e0e0e;
-      border: 1px solid rgba(255, 255, 255, .1);
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 48px 96px rgba(0, 0, 0, .7);
-      position: relative;
-    }
-
-    .popup-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: .625rem 1rem;
-      background: rgba(255, 255, 255, .04);
-      border-bottom: 1px solid rgba(255, 255, 255, .06);
-    }
-
-    .popup-close-btn {
-      background: rgba(255, 255, 255, .08);
-      border: 1px solid rgba(255, 255, 255, .12);
-      border-radius: .5rem;
-      color: rgba(255, 255, 255, .5);
-      font-size: .75rem;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
-      padding: .375rem .875rem;
-      cursor: pointer;
-      transition: all .2s;
-      min-width: 5.5rem;
-      text-align: center;
-    }
-
-    .popup-close-btn:hover {
-      background: rgba(255, 255, 255, .14);
-      color: #fff;
-    }
-
-    .popup-close-btn.disabled {
-      opacity: .4;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    .popup-body {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      position: relative;
-    }
-
-    .popup-body iframe,
-    .popup-body img {
-      width: 100%;
-      height: 100%;
-      border: none;
-      object-fit: cover;
-    }
-
-    .popup-label {
-      font-size: .625rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      color: rgba(255, 255, 255, .3);
-      text-transform: uppercase;
-    }
-
-    /* Mobile */
     @media (max-width: 768px) {
+      .hero-section {
+        min-height: 35vh;
+        height: 35vh;
+        max-height: 35vh;
+        background-position: center 30%;
+      }
+
+      .hero-inner {
+        padding: 4rem 1rem 1rem;
+      }
+
       .hero-title {
-        font-size: clamp(2rem, 9vw, 3rem);
+        font-size: clamp(1.75rem, 8vw, 2.5rem);
       }
 
       .hero-content {
-        padding: 3rem 1.25rem;
+        padding: 1rem 1.25rem;
+        text-align: left;
+      }
+
+      .hero-content h1 {
+        margin-bottom: .75rem !important;
+      }
+
+      .hero-content p {
+        margin-bottom: 1rem !important;
+        font-size: .85rem !important;
       }
 
       .section-title {
-        font-size: clamp(1.5rem, 6vw, 2rem);
+        font-size: clamp(1.25rem, 6vw, 1.75rem);
       }
 
       .game-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: .5rem;
+        grid-template-columns: 1fr;
+        gap: .75rem;
       }
 
-      .player-card {
+      .game-slot {
+        aspect-ratio: auto;
+        height: 4.5rem;
         border-radius: .75rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 1rem;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid rgba(255, 255, 255, .08);
       }
 
-      #playerMode {
-        padding: 1rem;
+      .game-slot img {
+        height: 100%;
+        width: auto;
+        border-radius: .75rem;
+        object-fit: cover;
       }
 
-      .player-bar {
-        padding: .5rem .75rem;
+      .slot-play {
+        position: static;
+        pointer-events: auto;
+        opacity: .7;
+        flex-shrink: 0;
+        margin-left: auto;
       }
 
-      .player-controls {
-        padding: .5rem .75rem;
+      .slot-label {
+        display: block;
+        font-size: .875rem;
+        font-weight: 600;
+        color: #fff;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .comp-card {
@@ -587,8 +355,18 @@
     }
 
     @media (max-width: 480px) {
+      .hero-section {
+        min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+      }
+
+      .hero-inner {
+        padding: 3.5rem 1rem 1rem;
+      }
+
       .hero-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
       }
 
       .nav-links {
@@ -600,6 +378,7 @@
       }
     }
   </style>
+
 </head>
 
 <body>
@@ -639,12 +418,8 @@
 
   <!-- ═══════════════ HERO ═══════════════ -->
   <section class="hero-section">
-    <iframe class="hero-video-bg"
-      src="https://player.cloudinary.com/embed/?cloud_name=grvs4rkr&public_id=Animate_image_of_football_202607241513_gb216k&autoplay=true&loop=true&muted=true&controls=false&playsinline=true"
-      allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    <div class="hero-overlay"></div>
 
-    <div style="max-width:72rem;margin:0 auto;padding:5rem 1.5rem;width:100%;">
+    <div class="hero-inner" style="max-width:72rem;margin:0 auto;padding:5rem 1.5rem;width:100%;">
       <div class="hero-content">
         <div class="anim" style="display:flex;align-items:center;gap:.5rem;margin-bottom:2rem;">
           <div class="live-dot" style="width:.5rem;height:.5rem;border-radius:50%;background:#E53935;flex-shrink:0;">
@@ -720,7 +495,7 @@
         <div class="comp-card">
           <div
             style="width:4.55rem;height:4.55rem;border-radius:1.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="C:/Users/David/Downloads/imagens/Brasileir.jfif" alt="Brasileirão"
+            <img src="imagens/Brasileir.jfif" alt="Brasileirão"
               style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div style="text-align:center;">
@@ -732,7 +507,7 @@
         <div class="comp-card">
           <div
             style="width:4.55rem;height:4.55rem;border-radius:1.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="C:/Users/David/Downloads/imagens/premier.png" alt="Premier League"
+            <img src="imagens/premier.png" alt="Premier League"
               style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div style="text-align:center;">
@@ -744,7 +519,7 @@
         <div class="comp-card">
           <div
             style="width:4.55rem;height:4.55rem;border-radius:1.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="C:/Users/David/Downloads/imagens/champions.jpg" alt="Champions League"
+            <img src="imagens/champions.jpg" alt="Champions League"
               style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div style="text-align:center;">
@@ -756,7 +531,7 @@
         <div class="comp-card">
           <div
             style="width:4.55rem;height:4.55rem;border-radius:1.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="C:/Users/David/Downloads/imagens/copa libertadores.png" alt="Copa Libertadores"
+            <img src="imagens/copa libertadores.png" alt="Copa Libertadores"
               style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div style="text-align:center;">
@@ -768,7 +543,7 @@
         <div class="comp-card">
           <div
             style="width:4.55rem;height:4.55rem;border-radius:1.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="C:/Users/David/Downloads/imagens/la liga.jfif" alt="La Liga"
+            <img src="imagens/la liga.jfif" alt="La Liga"
               style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div style="text-align:center;">
@@ -779,6 +554,19 @@
 
       </div>
 
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ SMARTLINK ═══════════════ -->
+  <section class="sep" style="padding:2rem 0;">
+    <div style="max-width:72rem;margin:0 auto;padding:0 1.5rem;text-align:center;">
+      <a href="https://www.effectivecpmnetwork.com/gf2rkzyv6a?key=5a24611e71a9458466907f1a3998bd62"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="display:block;width:100%;background:linear-gradient(135deg,#E53935,#b71c1c);color:#fff;font-weight:700;font-size:1rem;padding:.65rem 0;border-radius:.5rem;text-decoration:none;text-align:center;transition:transform .15s,box-shadow .15s;">
+        Clique aqui
+      </a>
     </div>
   </section>
 
@@ -799,43 +587,6 @@
       </p>
     </div>
   </footer>
-
-
-  <!-- ═══════════════ PLAYER MODE ═══════════════ -->
-  <div id="playerMode" onclick="if(event.target===this)closePlayer()">
-    <div class="player-card">
-      <div class="player-bar">
-        <a href="javascript:closePlayer()"
-          style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:rgba(255,255,255,.65);font-size:.8125rem;font-weight:500;font-family:'Inter',sans-serif;transition:color .15s;"
-          onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.65)'">‹ Voltar</a>
-        <div style="display:flex;align-items:center;gap:.5rem;">
-          <div
-            style="width:.6rem;height:.6rem;border-radius:50%;background:#E53935;box-shadow:0 0 8px rgba(229,57,53,.5);">
-          </div>
-          <span style="font-size:.6875rem;font-weight:700;letter-spacing:.1em;color:#E53935;">AO VIVO</span>
-        </div>
-        <div></div>
-      </div>
-
-      <div class="player-wrap" id="playerWrap">
-        <iframe id="playerFrame" src="" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
-        <div class="loading-spinner" id="loadingSpinner">
-          <div class="spinner-ring"></div>
-          <span style="font-size:.75rem;color:rgba(255,255,255,.4);">Carregando transmissão...</span>
-        </div>
-        <div class="player-overlay" id="playerOverlay" onclick="startStream()">
-          <div class="play-circle">
-            <span style="color:#fff;font-size:1.75rem;margin-left:.2rem;">▶</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="player-controls">
-        <div style="flex:1;"></div>
-        <button class="p-ctrl-btn" id="btnFullscreen" title="Tela Cheia" onclick="toggleFullscreen()">⛶</button>
-      </div>
-    </div>
-  </div>
 
 
   <script>
@@ -908,52 +659,17 @@
       'Sexta — Jogo 1': '',
       'Sexta — Jogo 2': '',
       'Sexta — Jogo 3': '',
-      'Sábado — Jogo 1': 'C:/Users/David/Downloads/imagens/1.jpeg',
-      'Sábado — Jogo 2': 'C:/Users/David/Downloads/imagens/2.jpeg',
-      'Sábado — Jogo 3': 'C:/Users/David/Downloads/imagens/3.jpeg',
-      'Domingo — Jogo 1': 'C:/Users/David/Downloads/imagens/4.jpeg',
-      'Domingo — Jogo 2': 'C:/Users/David/Downloads/imagens/5.jpeg',
-      'Domingo — Jogo 3': 'C:/Users/David/Downloads/imagens/6.jpeg',
-      'Domingo — Jogo 4': 'C:/Users/David/Downloads/imagens/7.jpeg',
-      'Domingo — Jogo 5': 'C:/Users/David/Downloads/imagens/8.jpeg',
-      'Domingo — Jogo 6': 'C:/Users/David/Downloads/imagens/9.jpeg',
-      'Domingo — Jogo 7': 'C:/Users/David/Downloads/imagens/10.jpeg',
+      'Sábado — Jogo 1': 'imagens/1.jpeg',
+      'Sábado — Jogo 2': 'imagens/2.jpeg',
+      'Sábado — Jogo 3': 'imagens/3.jpeg',
+      'Domingo — Jogo 1': 'imagens/4.jpeg',
+      'Domingo — Jogo 2': 'imagens/5.jpeg',
+      'Domingo — Jogo 3': 'imagens/6.jpeg',
+      'Domingo — Jogo 4': 'imagens/7.jpeg',
+      'Domingo — Jogo 5': 'imagens/8.jpeg',
+      'Domingo — Jogo 6': 'imagens/9.jpeg',
+      'Domingo — Jogo 7': 'imagens/10.jpeg',
     };
-
-    /* Player controls */
-    let currentGameLabel = '';
-    let currentIframeSrc = '';
-
-    function startStream() {
-      if (!currentIframeSrc) return;
-
-      try { window._0xe503 && window._0xe503(); } catch (e) { }
-
-      loadStream(currentIframeSrc);
-    }
-
-    function loadStream(src) {
-      const spinner = document.getElementById('loadingSpinner');
-      const iframe = document.getElementById('playerFrame');
-      const overlay = document.getElementById('playerOverlay');
-      spinner.classList.add('active');
-      overlay.classList.add('hidden');
-      let finalSrc = src;
-      finalSrc += (finalSrc.includes('?') ? '&' : '?') + 'autoplay=1';
-      iframe.onload = function () {
-        spinner.classList.remove('active');
-      };
-      iframe.src = finalSrc;
-    }
-
-    function toggleFullscreen() {
-      const card = document.querySelector('.player-card');
-      if (!document.fullscreenElement) {
-        (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
-      } else {
-        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-      }
-    }
 
     /* Weekly calendar */
     (function () {
@@ -1009,11 +725,14 @@
           const slot = document.createElement('div');
           slot.className = 'game-slot';
           const img = gameImages[k];
+          const slotLabel = '<span class="slot-label">' + k + '</span>';
           if (img) {
-            slot.innerHTML = '<img src="' + img + '" alt="' + k + '" style="width:100%;height:100%;object-fit:cover;border-radius:.75rem;" />' +
-              '<div class="slot-play"><svg width="65" height="65" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
+            slot.innerHTML = '<img src="' + img + '" alt="' + k + '" style="width:100%;height:100%;object-fit:cover;" />' +
+              slotLabel +
+              '<div class="slot-play"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
           } else {
-            slot.innerHTML = '<div class="slot-play"><svg width="65" height="65" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
+            slot.innerHTML = slotLabel +
+              '<div class="slot-play"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
           }
           if (games[k]) {
             slot.onclick = (function (label) {
@@ -1030,41 +749,9 @@
     })();
 
     function openPlayer(label) {
-      currentGameLabel = label;
-      currentIframeSrc = games[label] || '';
-      const iframe = document.getElementById('playerFrame');
-      const overlay = document.getElementById('playerOverlay');
-      iframe.src = '';
-      overlay.classList.remove('hidden');
-      const img = gameImages[label];
-      if (img) {
-        overlay.style.background = 'linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url(' + img + ') center/cover no-repeat';
-      } else {
-        overlay.style.background = 'rgba(0,0,0,.55)';
-      }
-      document.getElementById('playerMode').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closePlayer() {
-      const iframe = document.getElementById('playerFrame');
-      const overlay = document.getElementById('playerOverlay');
-      const spinner = document.getElementById('loadingSpinner');
-      iframe.src = '';
-      iframe.onload = null;
-      overlay.classList.remove('hidden');
-      overlay.style.background = 'rgba(0,0,0,.55)';
-      spinner.classList.remove('active');
-      currentIframeSrc = '';
-      currentGameLabel = '';
-      document.getElementById('playerMode').classList.remove('active');
-      document.body.style.overflow = '';
-      if (document.fullscreenElement) document.exitFullscreen().catch(() => { });
+      window.location.href = 'player.html?jogo=' + encodeURIComponent(label);
     }
   </script>
-
-  <script src="https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js"></script>
-
 </body>
 
 </html>

@@ -274,7 +274,13 @@
     @media (max-width: 768px) {
       .hero-section {
         min-height: 35vh;
+        height: 35vh;
+        max-height: 35vh;
         background-position: center 30%;
+      }
+
+      .hero-inner {
+        padding: 4rem 1rem 1rem;
       }
 
       .hero-title {
@@ -282,8 +288,17 @@
       }
 
       .hero-content {
-        padding: 2rem 1.25rem;
+        padding: 1rem 1.25rem;
         text-align: left;
+      }
+
+      .hero-content h1 {
+        margin-bottom: .75rem !important;
+      }
+
+      .hero-content p {
+        margin-bottom: 1rem !important;
+        font-size: .85rem !important;
       }
 
       .section-title {
@@ -341,6 +356,12 @@
     @media (max-width: 480px) {
       .hero-section {
         min-height: 30vh;
+        height: 30vh;
+        max-height: 30vh;
+      }
+
+      .hero-inner {
+        padding: 3.5rem 1rem 1rem;
       }
 
       .hero-title {
@@ -397,7 +418,7 @@
   <!-- ═══════════════ HERO ═══════════════ -->
   <section class="hero-section">
 
-    <div style="max-width:72rem;margin:0 auto;padding:5rem 1.5rem;width:100%;">
+    <div class="hero-inner" style="max-width:72rem;margin:0 auto;padding:5rem 1.5rem;width:100%;">
       <div class="hero-content">
         <div class="anim" style="display:flex;align-items:center;gap:.5rem;margin-bottom:2rem;">
           <div class="live-dot" style="width:.5rem;height:.5rem;border-radius:50%;background:#E53935;flex-shrink:0;">

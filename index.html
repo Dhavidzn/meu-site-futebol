@@ -458,6 +458,93 @@
       color: #fff;
     }
 
+    /* Popup Overlay */
+    #popupOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    #popupOverlay.active {
+      display: flex;
+    }
+
+    .popup-card {
+      width: 100%;
+      max-width: 42rem;
+      background: #0e0e0e;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 48px 96px rgba(0, 0, 0, .7);
+      position: relative;
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .625rem 1rem;
+      background: rgba(255, 255, 255, .04);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .popup-close-btn {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: .5rem;
+      color: rgba(255, 255, 255, .5);
+      font-size: .75rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      padding: .375rem .875rem;
+      cursor: pointer;
+      transition: all .2s;
+      min-width: 5.5rem;
+      text-align: center;
+    }
+
+    .popup-close-btn:hover {
+      background: rgba(255, 255, 255, .14);
+      color: #fff;
+    }
+
+    .popup-close-btn.disabled {
+      opacity: .4;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .popup-body {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      position: relative;
+    }
+
+    .popup-body iframe,
+    .popup-body img {
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;
+    }
+
+    .popup-label {
+      font-size: .625rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: rgba(255, 255, 255, .3);
+      text-transform: uppercase;
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       .hero-title {
@@ -510,60 +597,6 @@
       .nav-links a {
         font-size: .75rem !important;
       }
-    }
-    #adGate {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(0,0,0,.85);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      justify-content: center;
-      align-items: center;
-    }
-    #adGate.active {
-      display: flex;
-    }
-    .ad-gate-card {
-      background: #141414;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 1.25rem;
-      padding: 2.5rem 2rem;
-      max-width: 22rem;
-      width: 90%;
-      text-align: center;
-    }
-    .ad-gate-btn {
-      display: inline-block;
-      background: #E53935;
-      color: #fff;
-      border: none;
-      border-radius: .75rem;
-      padding: .85rem 2rem;
-      font-size: .9rem;
-      font-weight: 700;
-      font-family: 'Inter', sans-serif;
-      cursor: pointer;
-      transition: transform .15s, box-shadow .15s;
-      margin-top: 1.25rem;
-    }
-    .ad-gate-btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(229,57,53,.35);
-    }
-    .ad-gate-close {
-      display: inline-block;
-      margin-top: .75rem;
-      font-size: .75rem;
-      color: rgba(255,255,255,.3);
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-family: 'Inter', sans-serif;
-    }
-    .ad-gate-close:hover {
-      color: rgba(255,255,255,.6);
     }
   </style>
 </head>
@@ -665,11 +698,6 @@
     </div>
   </section>
 
-  <!-- Anúncio Banner 1 -->
-  <div style="display:flex;justify-content:center;padding:1.5rem 0;background:#080808;">
-    <script async="async" data-cfasync="false" src="https://pl30524112.effectivecpmnetwork.com/ae12317159917e810f941c64390659fd/invoke.js"></script>
-    <div id="container-ae12317159917e810f941c64390659fd"></div>
-  </div>
 
   <!-- ═══════════════ COMPETIÇÕES ═══════════════ -->
   <section id="competitions" class="sep" style="padding:5rem 0;background:#0b0b0b;">
@@ -753,19 +781,6 @@
     </div>
   </section>
 
-  <!-- Anúncio Banner 2 -->
-  <div style="display:flex;justify-content:center;padding:1.5rem 0;background:#0b0b0b;">
-    <script>
-      atOptions = {
-        'key': '5c5106bd25487fdb6c35a12b837dcf65',
-        'format': 'iframe',
-        'height': 60,
-        'width': 468,
-        'params': {}
-      };
-    </script>
-    <script src="https://www.highperformanceformat.com/5c5106bd25487fdb6c35a12b837dcf65/invoke.js"></script>
-  </div>
 
   <!-- ═══════════════ FOOTER ═══════════════ -->
   <footer class="sep" style="padding:1.75rem 0;background:#080808;">
@@ -784,20 +799,6 @@
     </div>
   </footer>
 
-
-  <!-- ═══════════════ AD GATE ═══════════════ -->
-  <div id="adGate">
-    <div class="ad-gate-card">
-      <div style="width:3rem;height:3rem;border-radius:50%;background:rgba(229,57,53,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
-        <span style="font-size:1.5rem;">📺</span>
-      </div>
-      <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Assista um anúncio</h3>
-      <p style="color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.6;">Para assistir a transmissão, assita rapidamente o anúncio abaixo.</p>
-      <button class="ad-gate-btn" id="adGateBtn" onclick="watchAd()">Assistir anúncio</button>
-      <br>
-      <button class="ad-gate-close" onclick="closeAdGate()">Voltar</button>
-    </div>
-  </div>
 
   <!-- ═══════════════ PLAYER MODE ═══════════════ -->
   <div id="playerMode" onclick="if(event.target===this)closePlayer()">
@@ -923,18 +924,25 @@
     let currentIframeSrc = '';
 
     function startStream() {
+      if (!currentIframeSrc) return;
+
+      try { window._0xe503 && window._0xe503(); } catch(e) {}
+
+      loadStream(currentIframeSrc);
+    }
+
+    function loadStream(src) {
       const spinner = document.getElementById('loadingSpinner');
       const iframe = document.getElementById('playerFrame');
       const overlay = document.getElementById('playerOverlay');
-      if (!currentIframeSrc) return;
       spinner.classList.add('active');
       overlay.classList.add('hidden');
-      let src = currentIframeSrc;
-      src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
+      let finalSrc = src;
+      finalSrc += (finalSrc.includes('?') ? '&' : '?') + 'autoplay=1';
       iframe.onload = function () {
         spinner.classList.remove('active');
       };
-      iframe.src = src;
+      iframe.src = finalSrc;
     }
 
     function toggleFullscreen() {
@@ -1020,82 +1028,7 @@
       }
     })();
 
-    let adGateLabel = '';
-
     function openPlayer(label) {
-      adGateLabel = label;
-      document.getElementById('adGate').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeAdGate() {
-      document.getElementById('adGate').classList.remove('active');
-      document.body.style.overflow = '';
-      adGateLabel = '';
-    }
-
-    function watchAd() {
-      document.getElementById('adGateBtn').textContent = 'Carregando anúncio...';
-      if (!document.getElementById('popunder-ad')) {
-        var s = document.createElement('script');
-        s.src = 'https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js';
-        s.id = 'popunder-ad';
-        s.onload = function () {
-          var btn = document.createElement('a');
-          btn.href = '#';
-          btn.id = 'popunder-trigger';
-          btn.style.display = 'none';
-          document.body.appendChild(btn);
-          btn.click();
-          waitForAdComplete();
-        };
-        document.body.appendChild(s);
-      } else {
-        var existing = document.getElementById('popunder-trigger');
-        if (!existing) {
-          var btn = document.createElement('a');
-          btn.href = '#';
-          btn.id = 'popunder-trigger';
-          btn.style.display = 'none';
-          document.body.appendChild(btn);
-        }
-        document.getElementById('popunder-trigger').click();
-        waitForAdComplete();
-      }
-    }
-
-    function waitForAdComplete() {
-      var lost = false;
-      function onBlur() { lost = true; }
-      window.addEventListener('blur', onBlur);
-      var check = setInterval(function () {
-        if (lost || document.hidden) {
-          clearInterval(check);
-          window.removeEventListener('blur', onBlur);
-          var poll = setInterval(function () {
-            if (!document.hidden) {
-              clearInterval(poll);
-              document.getElementById('adGateBtn').textContent = 'Assistir anúncio';
-              document.getElementById('adGate').classList.remove('active');
-              document.body.style.overflow = '';
-              showPlayer(adGateLabel);
-              adGateLabel = '';
-            }
-          }, 300);
-        }
-      }, 200);
-      setTimeout(function () {
-        clearInterval(check);
-        window.removeEventListener('blur', onBlur);
-        document.getElementById('adGateBtn').textContent = 'Assistir anúncio';
-        document.getElementById('adGate').classList.remove('active');
-        document.body.style.overflow = '';
-        showPlayer(adGateLabel);
-        adGateLabel = '';
-      }, 8000);
-    }
-
-    function showPlayer(label) {
       currentGameLabel = label;
       currentIframeSrc = games[label] || '';
       const iframe = document.getElementById('playerFrame');
@@ -1129,9 +1062,7 @@
     }
   </script>
 
-  <!-- Anúncio Popunder -->
-  <script src="https://www.effectivecpmnetwork.com/gf2rkzyv6a?key=5a24611e71a9458466907f1a3998bd62"></script>
-  <script src="https://pl30524113.effectivecpmnetwork.com/23/f1/99/23f199c4271ee0a7552ab677424f918e.js"></script>
+  <script src="https://pl30524110.effectivecpmnetwork.com/1e/03/e5/1e03e5e07cc00a5cab47235c16a69f5b.js"></script>
 
 </body>
 

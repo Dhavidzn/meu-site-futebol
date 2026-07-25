@@ -603,14 +603,13 @@
   <style>
     #adGate {
       display: none;
-      position: fixed;
+      position: absolute;
       inset: 0;
       z-index: 200;
-      background: rgba(0,0,0,.85);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(0,0,0,.9);
       justify-content: center;
       align-items: center;
+      border-radius: 1.25rem;
     }
     #adGate.active {
       display: flex;
@@ -861,23 +860,23 @@
   </footer>
 
 
-  <!-- ═══════════════ AD GATE ═══════════════ -->
-  <div id="adGate">
-    <div class="ad-gate-card">
-      <div style="width:3rem;height:3rem;border-radius:50%;background:rgba(229,57,53,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
-        <span style="font-size:1.5rem;">&#128250;</span>
-      </div>
-      <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Assista um anuncio</h3>
-      <p style="color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.6;">Para assistir a transmissão, assita rapidamente o anuncio abaixo.</p>
-      <button class="ad-gate-btn" id="adGateBtn" onclick="watchAd()">Assistir anuncio</button>
-      <br>
-      <button class="ad-gate-close" onclick="closeAdGate()">Voltar</button>
-    </div>
-  </div>
-
   <!-- ═══════════════ PLAYER MODE ═══════════════ -->
   <div id="playerMode" onclick="if(event.target===this)closePlayer()">
     <div class="player-card">
+
+      <!-- ═══════════════ AD GATE ═══════════════ -->
+      <div id="adGate">
+        <div class="ad-gate-card">
+          <div style="width:3rem;height:3rem;border-radius:50%;background:rgba(229,57,53,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+            <span style="font-size:1.5rem;">&#128250;</span>
+          </div>
+          <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Assista um anuncio</h3>
+          <p style="color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.6;">Para assistir a transmissão, assita rapidamente o anuncio abaixo.</p>
+          <button class="ad-gate-btn" id="adGateBtn" onclick="watchAd()">Assistir anuncio</button>
+          <br>
+          <button class="ad-gate-close" onclick="closeAdGate()">Voltar</button>
+        </div>
+      </div>
       <div class="player-bar">
         <a href="javascript:closePlayer()"
           style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:rgba(255,255,255,.65);font-size:.8125rem;font-weight:500;font-family:'Inter',sans-serif;transition:color .15s;"
@@ -1091,9 +1090,8 @@
               return function () { openPlayer(label); };
             })(k);
           } else {
-            slot.onclick = (function (label) {
-              return function () { openPlayer(label); };
-            })(k);
+            slot.style.opacity = '.3';
+            slot.style.cursor = 'default';
           }
           slotsContainer.appendChild(slot);
         }
@@ -1103,54 +1101,15 @@
 
     let adGateLabel = '';
 
+    function hasWatchedAd() {
+      try { return localStorage.getItem('ad_watched') === '1'; } catch(e) { return true; }
+    }
+
+    function markAdWatched() {
+      try { localStorage.setItem('ad_watched', '1'); } catch(e) {}
+    }
+
     function openPlayer(label) {
-      adGateLabel = label;
-      document.getElementById('adGate').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeAdGate() {
-      document.getElementById('adGate').classList.remove('active');
-      document.body.style.overflow = '';
-      adGateLabel = '';
-    }
-
-    function watchAd() {
-      document.getElementById('adGateBtn').textContent = 'Carregando anuncio...';
-
-      var lost = false;
-      function onBlur() { lost = true; }
-      window.addEventListener('blur', onBlur);
-
-      var check = setInterval(function () {
-        if (lost || document.hidden) {
-          clearInterval(check);
-          window.removeEventListener('blur', onBlur);
-          var poll = setInterval(function () {
-            if (!document.hidden) {
-              clearInterval(poll);
-              document.getElementById('adGateBtn').textContent = 'Assistir anuncio';
-              document.getElementById('adGate').classList.remove('active');
-              document.body.style.overflow = '';
-              showPlayer(adGateLabel);
-              adGateLabel = '';
-            }
-          }, 300);
-        }
-      }, 200);
-
-      setTimeout(function () {
-        clearInterval(check);
-        window.removeEventListener('blur', onBlur);
-        document.getElementById('adGateBtn').textContent = 'Assistir anuncio';
-        document.getElementById('adGate').classList.remove('active');
-        document.body.style.overflow = '';
-        showPlayer(adGateLabel);
-        adGateLabel = '';
-      }, 8000);
-    }
-
-    function showPlayer(label) {
       currentGameLabel = label;
       currentIframeSrc = games[label] || '';
       const iframe = document.getElementById('playerFrame');
@@ -1167,6 +1126,53 @@
       document.body.style.overflow = 'hidden';
     }
 
+    function startStream() {
+      if (!currentIframeSrc) return;
+
+      if (hasWatchedAd()) {
+        loadStream(currentIframeSrc);
+      } else {
+        document.getElementById('adGate').classList.add('active');
+      }
+    }
+
+    function closeAdGate() {
+      document.getElementById('adGate').classList.remove('active');
+    }
+
+    function watchAd() {
+      document.getElementById('adGateBtn').textContent = 'Carregando anuncio...';
+
+      var lost = false;
+      function onBlur() { lost = true; }
+      window.addEventListener('blur', onBlur);
+
+      var check = setInterval(function () {
+        if (lost || document.hidden) {
+          clearInterval(check);
+          window.removeEventListener('blur', onBlur);
+          var poll = setInterval(function () {
+            if (!document.hidden) {
+              clearInterval(poll);
+              markAdWatched();
+              document.getElementById('adGateBtn').textContent = 'Assistir anuncio';
+              document.getElementById('adGate').classList.remove('active');
+              loadStream(currentIframeSrc);
+            }
+          }, 300);
+        }
+      }, 200);
+
+      setTimeout(function () {
+        clearInterval(check);
+        window.removeEventListener('blur', onBlur);
+        markAdWatched();
+        document.getElementById('adGateBtn').textContent = 'Assistir anuncio';
+        document.getElementById('adGate').classList.remove('active');
+        loadStream(currentIframeSrc);
+      }, 8000);
+    }
+
     function closePlayer() {
       const iframe = document.getElementById('playerFrame');
       const overlay = document.getElementById('playerOverlay');
@@ -1176,6 +1182,7 @@
       overlay.classList.remove('hidden');
       overlay.style.background = 'rgba(0,0,0,.55)';
       spinner.classList.remove('active');
+      document.getElementById('adGate').classList.remove('active');
       currentIframeSrc = '';
       currentGameLabel = '';
       document.getElementById('playerMode').classList.remove('active');

@@ -5,7 +5,15 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src * 'self' https:; frame-src * https:; img-src * 'self' data: blob: https:; style-src * 'self' 'unsafe-inline' https:; font-src * 'self' https:;"
+          "value": "default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'self' 'unsafe-inline' 'unsafe-eval' https: http:; connect-src * 'self' https: http:; frame-src * https: http:; img-src * 'self' data: blob: https: http:; style-src * 'self' 'unsafe-inline' https: http:; font-src * 'self' https: http:; media-src * https: http:; object-src * https: http:"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "ALLOWALL"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     }

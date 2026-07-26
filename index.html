@@ -953,6 +953,7 @@
               if (gameKey && games[gameKey]) {
                 slotEl.onclick = function () { openPlayer(gameKey); };
               } else {
+                slotEl.style.opacity = '.3';
                 slotEl.style.cursor = 'default';
               }
             })(slots[x]);

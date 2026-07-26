@@ -251,6 +251,93 @@
       box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
     }
 
+    .game-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.85));
+      padding: 1.5rem .5rem .5rem;
+      z-index: 2;
+    }
+
+    .game-info .gi-name {
+      font-size: .625rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .game-info .gi-time {
+      font-size: .5625rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.6);
+      margin-top: .125rem;
+    }
+
+    @media (min-width: 769px) {
+      .game-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .game-grid.has-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .day-sub {
+      margin-bottom: 1.25rem;
+      border-radius: .75rem;
+      padding: .75rem;
+    }
+
+    .day-sub-live {
+      background: rgba(229, 57, 53, .07);
+      border: 1px solid rgba(229, 57, 53, .18);
+    }
+
+    .day-sub-upcoming {
+      background: transparent;
+    }
+
+    .day-sub-finished {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid rgba(255, 255, 255, .04);
+      opacity: .55;
+    }
+
+    .day-sub-title {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin-bottom: .625rem;
+      font-size: .6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .day-sub-live .day-sub-title {
+      color: #E53935;
+    }
+
+    .day-sub-upcoming .day-sub-title {
+      color: rgba(255, 255, 255, .4);
+    }
+
+    .day-sub-finished .day-sub-title {
+      color: rgba(255, 255, 255, .22);
+    }
+
+    .slot-finished {
+      opacity: .5;
+    }
+
     .slot-play {
       position: absolute;
       inset: 0;
@@ -460,15 +547,11 @@
               style="width:.5rem;height:.5rem;border-radius:50%;background:#E53935;margin-bottom:.25rem;flex-shrink:0;">
             </div>
           </div>
-          <p style="font-size:.8125rem;color:rgba(255,255,255,.28);">Jogos da semana, atualizado no domingo às 00:00</p>
+          <p style="font-size:.8125rem;color:rgba(255,255,255,.28);">Jogos da semana, atualizado automaticamente</p>
         </div>
       </div>
 
-      <div class="anim anim-d1" style="display:flex;gap:.5rem;margin-bottom:1.75rem;flex-wrap:wrap;" id="dayTabs"></div>
-
-      <div class="anim anim-d2" style="display:none;" id="gameSlotsWrap">
-        <div class="game-grid" id="gameSlots"></div>
-      </div>
+      <div id="daySections"></div>
 
     </div>
   </section>
@@ -607,21 +690,6 @@
        ADICIONE SEUS IFRAMES AQUI
        ======================================== */
     const games = {
-      'Segunda — Jogo 1': '',
-      'Segunda — Jogo 2': '',
-      'Segunda — Jogo 3': '',
-      'Terça — Jogo 1': '',
-      'Terça — Jogo 2': '',
-      'Terça — Jogo 3': '',
-      'Quarta — Jogo 1': '',
-      'Quarta — Jogo 2': '',
-      'Quarta — Jogo 3': '',
-      'Quinta — Jogo 1': '',
-      'Quinta — Jogo 2': '',
-      'Quinta — Jogo 3': '',
-      'Sexta — Jogo 1': '',
-      'Sexta — Jogo 2': '',
-      'Sexta — Jogo 3': '',
       'Sábado — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=primevideo',
       'Sábado — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere',
       'Sábado — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=globorj',
@@ -631,13 +699,7 @@
       'Domingo — Jogo 4': 'https://sinalpublicoetv.vercel.app/?id=premiere2',
       'Domingo — Jogo 5': 'https://sinalpublicoetv.vercel.app/?id=premiere5',
       'Domingo — Jogo 6': 'https://sinalpublicoetv.vercel.app/?id=sportv',
-      'Domingo — Jogo 7': 'https://sinalpublicoetv.vercel.app/?id=premiere6'
-    };
-
-    /* ========================================
-       ADICIONE AS IMAGENS DOS JOGOS AQUI
-       ======================================== */
-    const gameImages = {
+      'Domingo — Jogo 7': 'https://sinalpublicoetv.vercel.app/?id=premiere6',
       'Segunda — Jogo 1': '',
       'Segunda — Jogo 2': '',
       'Segunda — Jogo 3': '',
@@ -647,12 +709,13 @@
       'Quarta — Jogo 1': '',
       'Quarta — Jogo 2': '',
       'Quarta — Jogo 3': '',
-      'Quinta — Jogo 1': '',
-      'Quinta — Jogo 2': '',
-      'Quinta — Jogo 3': '',
-      'Sexta — Jogo 1': '',
-      'Sexta — Jogo 2': '',
-      'Sexta — Jogo 3': '',
+      'Quarta — Jogo 4': ''
+    };
+
+    /* ========================================
+       ADICIONE AS IMAGENS DOS JOGOS AQUI
+       ======================================== */
+    const gameImages = {
       'Sábado — Jogo 1': 'imagens/1.jpeg',
       'Sábado — Jogo 2': 'imagens/2.jpeg',
       'Sábado — Jogo 3': 'imagens/3.jpeg',
@@ -663,83 +726,262 @@
       'Domingo — Jogo 5': 'imagens/8.jpeg',
       'Domingo — Jogo 6': 'imagens/9.jpeg',
       'Domingo — Jogo 7': 'imagens/10.jpeg',
+      'Segunda — Jogo 1': 'imagens/11.jpeg',
+      'Segunda — Jogo 2': 'imagens/12.jpeg',
+      'Segunda — Jogo 3': 'imagens/13.jpeg',
+      'Terça — Jogo 1': 'imagens/14.jpeg',
+      'Terça — Jogo 2': 'imagens/15.jpeg',
+      'Terça — Jogo 3': 'imagens/16.jpeg',
+      'Quarta — Jogo 1': 'imagens/17.jpeg',
+      'Quarta — Jogo 2': 'imagens/18.jpeg',
+      'Quarta — Jogo 3': 'imagens/19.jpeg',
+      'Quarta — Jogo 4': 'imagens/20.jpeg'
     };
 
-    /* Weekly calendar */
-    (function () {
-      const tabs = document.getElementById('dayTabs');
-      const slotsWrap = document.getElementById('gameSlotsWrap');
-      const slotsContainer = document.getElementById('gameSlots');
-      if (!tabs) return;
-      const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+    const gameMeta = {
+      'Sábado — Jogo 1': { name: '', date: '25/07', time: '' },
+      'Sábado — Jogo 2': { name: '', date: '25/07', time: '' },
+      'Sábado — Jogo 3': { name: '', date: '25/07', time: '' },
+      'Domingo — Jogo 1': { name: 'Bahia x Corinthians', date: '26/07', time: '16:00' },
+      'Domingo — Jogo 2': { name: 'Cruzeiro x Botafogo', date: '26/07', time: '16:00' },
+      'Domingo — Jogo 3': { name: 'Flamengo x São Paulo', date: '26/07', time: '18:30' },
+      'Domingo — Jogo 4': { name: 'Grêmio x Fluminense', date: '26/07', time: '18:30' },
+      'Domingo — Jogo 5': { name: 'Bragantino x Coritiba', date: '26/07', time: '18:30' },
+      'Domingo — Jogo 6': { name: 'Palmeiras x Atlético-MG', date: '26/07', time: '19:30' },
+      'Domingo — Jogo 7': { name: 'Remo x Vitória', date: '26/07', time: '19:30' },
+      'Segunda — Jogo 1': { name: 'Atlético-GO x Operário', date: '27/07', time: '19:30' },
+      'Segunda — Jogo 2': { name: 'CRB x Vila Nova', date: '27/07', time: '19:30' },
+      'Segunda — Jogo 3': { name: 'Sport Recife x Cuiabá', date: '27/07', time: '19:30' },
+      'Terça — Jogo 1': { name: 'Juventude x Avaí', date: '28/07', time: '19:30' },
+      'Terça — Jogo 2': { name: 'Ponte Preta x Athletic', date: '28/07', time: '19:30' },
+      'Terça — Jogo 3': { name: 'Fortaleza x Botafogo-SP', date: '28/07', time: '21:45' },
+      'Quarta — Jogo 1': { name: 'Internacional x Flamengo', date: '29/07', time: '19:30' },
+      'Quarta — Jogo 2': { name: 'Mirassol x Remo', date: '29/07', time: '19:30' },
+      'Quarta — Jogo 3': { name: 'Fluminense x Bahia', date: '29/07', time: '21:30' },
+      'Quarta — Jogo 4': { name: 'Vitória x Palmeiras', date: '29/07', time: '21:30' }
+    };
 
-      function gameKey(dayIndex, j) {
-        return days[dayIndex] + ' — Jogo ' + j;
+    /* ========================================
+       Mini-seções por dia — auto-ordena e auto-remove
+       ======================================== */
+    (function () {
+      var container = document.getElementById('daySections');
+      if (!container) return;
+
+      var dayNames = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+      var dayOrder = [0, 1, 2, 3, 4, 5, 6];
+
+      function getTodayIndex() {
+        return new Date().getDay();
       }
 
-      function getGameCount(dayIndex) {
-        let max = 0;
-        for (let j = 1; j <= 20; j++) {
-          const k = gameKey(dayIndex, j);
+      function sortedDays() {
+        var today = getTodayIndex();
+        var result = [];
+        for (var i = 0; i < 7; i++) {
+          result.push(dayNames[dayOrder[(today + i) % 7]]);
+        }
+        return result;
+      }
+
+      function gameKey(dayName, j) {
+        return dayName + ' — Jogo ' + j;
+      }
+
+      function getGameCount(dayName) {
+        var max = 0;
+        for (var j = 1; j <= 20; j++) {
+          var k = gameKey(dayName, j);
           if (games[k] || gameImages[k]) max = j;
         }
         return max;
       }
 
-      /* Always create all 7 day tabs */
-      let firstValidDay = -1;
-      for (let i = 0; i < 7; i++) {
-        if (firstValidDay === -1 && getGameCount(i) > 0) firstValidDay = i;
-        const btn = document.createElement('button');
-        btn.className = 'tab';
-        btn.textContent = days[i];
-        btn.dataset.day = i;
-        btn.onclick = function () {
-          document.querySelectorAll('#dayTabs .tab').forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-          showDaySlots(parseInt(this.dataset.day));
-        };
-        tabs.appendChild(btn);
+      function isYesterday(dayIndex) {
+        var today = getTodayIndex();
+        return (today + 6) % 7 === dayIndex;
       }
 
-      /* Click first day that has games, otherwise first day */
-      const initialDay = firstValidDay >= 0 ? firstValidDay : 0;
-      tabs.querySelector('.tab[data-day="' + initialDay + '"]').classList.add('active');
-      showDaySlots(initialDay);
-
-      function showDaySlots(dayIndex) {
-        slotsContainer.innerHTML = '';
-        const count = getGameCount(dayIndex);
-        if (count === 0) {
-          slotsWrap.style.display = 'none';
-          return;
-        }
-        for (let j = 1; j <= count; j++) {
-          const k = gameKey(dayIndex, j);
-          const slot = document.createElement('div');
-          slot.className = 'game-slot';
-          const img = gameImages[k];
-          const slotLabel = '<span class="slot-label">' + k + '</span>';
-          if (img) {
-            slot.innerHTML = '<img src="' + img + '" alt="' + k + '" style="width:100%;height:100%;object-fit:cover;" />' +
-              slotLabel +
-              '<div class="slot-play"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
-          } else {
-            slot.innerHTML = slotLabel +
-              '<div class="slot-play"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
-          }
-          if (games[k]) {
-            slot.onclick = (function (label) {
-              return function () { openPlayer(label); };
-            })(k);
-          } else {
-            slot.style.opacity = '.3';
-            slot.style.cursor = 'default';
-          }
-          slotsContainer.appendChild(slot);
-        }
-        slotsWrap.style.display = 'block';
+      function dayDateStr(dayName) {
+        var today = new Date();
+        var todayIdx = today.getDay();
+        var targetIdx = dayNames.indexOf(dayName);
+        var diff = (targetIdx - todayIdx + 7) % 7;
+        var d = new Date(today);
+        d.setDate(d.getDate() + diff);
+        var dd = String(d.getDate()).padStart(2, '0');
+        var mm = String(d.getMonth() + 1).padStart(2, '0');
+        return dd + '/' + mm;
       }
+
+      function dayDateObj(dayName) {
+        var today = new Date();
+        var todayIdx = today.getDay();
+        var targetIdx = dayNames.indexOf(dayName);
+        var diff = (targetIdx - todayIdx + 7) % 7;
+        var d = new Date(today);
+        d.setDate(d.getDate() + diff);
+        d.setHours(0, 0, 0, 0);
+        return d;
+      }
+
+      function parseGameDateTime(meta, dayName) {
+        if (!meta || !meta.time) return null;
+        var dayDate = dayDateObj(dayName);
+        var timeParts = meta.time.split(':');
+        var h = parseInt(timeParts[0], 10);
+        var m = parseInt(timeParts[1], 10);
+        return new Date(dayDate.getFullYear(), dayDate.getMonth(), dayDate.getDate(), h, m);
+      }
+
+      function getGameStatus(meta, dayName) {
+        var start = parseGameDateTime(meta, dayName);
+        if (!start) return 'upcoming';
+        var now = new Date();
+        var GAME_DURATION = 125 * 60 * 1000;
+        var end = new Date(start.getTime() + GAME_DURATION);
+        if (now < start) return 'upcoming';
+        if (now <= end) return 'live';
+        return 'finished';
+      }
+
+      function buildSlotHTML(k, dayName) {
+        var img = gameImages[k];
+        var meta = gameMeta[k] || {};
+        var gName = meta.name || k;
+        var gTime = meta.time ? meta.date + ' • ' + meta.time : meta.date || '';
+        var status = getGameStatus(meta, dayName);
+
+        var liveIndicator = '';
+        if (status === 'live') {
+          liveIndicator = '<div style="position:absolute;top:.4rem;left:.4rem;z-index:3;display:flex;align-items:center;gap:.25rem;background:rgba(229,57,53,.85);border-radius:99px;padding:.15rem .4rem;">' +
+            '<span style="width:5px;height:5px;border-radius:50%;background:#fff;animation:livePulse 1.6s ease-in-out infinite;"></span>' +
+            '<span style="font-size:.5rem;font-weight:700;color:#fff;letter-spacing:.04em;">AO VIVO</span></div>';
+        } else if (status === 'finished') {
+          liveIndicator = '<div style="position:absolute;top:.4rem;left:.4rem;z-index:3;background:rgba(0,0,0,.55);border-radius:99px;padding:.15rem .4rem;">' +
+            '<span style="font-size:.5rem;font-weight:600;color:rgba(255,255,255,.5);">ENCERRADO</span></div>';
+        }
+
+        var infoHtml = '<div class="game-info"><div class="gi-name">' + gName + '</div>' +
+          (gTime ? '<div class="gi-time">' + gTime + '</div>' : '') + '</div>';
+
+        var slotInner = '';
+        if (img) {
+          slotInner = '<img src="' + img + '" alt="' + gName + '" style="width:100%;height:100%;object-fit:cover;" />';
+        } else {
+          slotInner = '<span class="slot-label">' + gName + '</span>';
+        }
+        slotInner += '<div class="slot-play"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(0,0,0,.45)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><polygon points="9.5,7 18.5,12 9.5,17" fill="#fff"/></svg></div>';
+        slotInner += liveIndicator + infoHtml;
+
+        return { html: '<div class="game-slot' + (status === 'finished' ? ' slot-finished' : '') + '" data-key="' + k + '">' + slotInner + '</div>', status: status, key: k };
+      }
+
+      function render() {
+        container.innerHTML = '';
+        var sorted = sortedDays();
+
+        for (var s = 0; s < sorted.length; s++) {
+          var dayName = sorted[s];
+          var dayIndex = dayNames.indexOf(dayName);
+          var count = getGameCount(dayName);
+
+          if (count === 0) continue;
+          if (isYesterday(dayIndex)) continue;
+
+          var isToday = dayIndex === getTodayIndex();
+          var dateLabel = dayDateStr(dayName);
+          var badge = isToday
+            ? '<span class="live-badge" style="margin-left:.5rem;"><span class="live-dot" style="width:.35rem;height:.35rem;border-radius:50%;background:#E53935;"></span> HOJE</span>'
+            : '';
+
+          var liveGames = [];
+          var upcomingGames = [];
+          var finishedGames = [];
+
+          for (var j = 1; j <= count; j++) {
+            var k = gameKey(dayName, j);
+            if (!games[k] && !gameImages[k]) continue;
+            var slotData = buildSlotHTML(k, dayName);
+            if (slotData.status === 'live') liveGames.push(slotData);
+            else if (slotData.status === 'finished') finishedGames.push(slotData);
+            else upcomingGames.push(slotData);
+          }
+
+          if (liveGames.length === 0 && upcomingGames.length === 0 && finishedGames.length === 0) continue;
+
+          var section = document.createElement('div');
+          section.style.marginBottom = '2rem';
+
+          var headerHTML = '<div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;">' +
+            '<h3 style="font-size:1rem;font-weight:700;color:rgba(255,255,255,.7);">' + dayName + ' <span style="font-weight:400;color:rgba(255,255,255,.35);font-size:.8125rem;">' + dateLabel + '</span></h3>' +
+            badge + '</div>';
+
+          var bodyHTML = '';
+
+          if (liveGames.length > 0) {
+            bodyHTML += '<div class="day-sub day-sub-live"><div class="day-sub-title">' +
+              '<span class="live-dot" style="width:5px;height:5px;border-radius:50%;background:#E53935;flex-shrink:0;"></span> AO VIVO AGORA</div>' +
+              '<div class="game-grid' + (liveGames.length >= 4 ? ' has-4' : '') + '">';
+            for (var i = 0; i < liveGames.length; i++) bodyHTML += liveGames[i].html;
+            bodyHTML += '</div></div>';
+          }
+
+          if (upcomingGames.length > 0) {
+            bodyHTML += '<div class="day-sub day-sub-upcoming"><div class="day-sub-title">' +
+              '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg> PRÓXIMOS</div>' +
+              '<div class="game-grid' + (upcomingGames.length >= 4 ? ' has-4' : '') + '">';
+            for (var i = 0; i < upcomingGames.length; i++) bodyHTML += upcomingGames[i].html;
+            bodyHTML += '</div></div>';
+          }
+
+          if (finishedGames.length > 0) {
+            bodyHTML += '<div class="day-sub day-sub-finished"><div class="day-sub-title">' +
+              '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg> ENCERRADOS</div>' +
+              '<div class="game-grid' + (finishedGames.length >= 4 ? ' has-4' : '') + '">';
+            for (var i = 0; i < finishedGames.length; i++) bodyHTML += finishedGames[i].html;
+            bodyHTML += '</div></div>';
+          }
+
+          section.innerHTML = headerHTML + bodyHTML;
+          container.appendChild(section);
+
+          var slots = section.querySelectorAll('.game-slot');
+          for (var x = 0; x < slots.length; x++) {
+            (function (slotEl) {
+              var gameKey = slotEl.getAttribute('data-key');
+              if (gameKey && games[gameKey]) {
+                slotEl.onclick = function () { openPlayer(gameKey); };
+              } else {
+                slotEl.style.cursor = 'default';
+              }
+            })(slots[x]);
+          }
+        }
+
+        if (container.children.length === 0) {
+          container.innerHTML = '<p style="font-size:.875rem;color:rgba(255,255,255,.28);text-align:center;padding:2rem 0;">Nenhum jogo disponível</p>';
+        }
+      }
+
+      render();
+
+      function msUntilNextMidnight() {
+        var now = new Date();
+        var next = new Date(now);
+        next.setHours(24, 0, 0, 0);
+        return next - now;
+      }
+
+      function scheduleDailyRefresh() {
+        setTimeout(function () {
+          render();
+          scheduleDailyRefresh();
+        }, msUntilNextMidnight());
+      }
+      scheduleDailyRefresh();
+
+      setInterval(function () { render(); }, 60000);
     })();
 
     function openPlayer(label) {

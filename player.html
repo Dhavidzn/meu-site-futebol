@@ -197,10 +197,7 @@
     }
 
     .ad-gate-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      justify-content: center;
+      display: inline-block;
       background: #E53935;
       color: #fff;
       border: none;
@@ -211,43 +208,11 @@
       cursor: pointer;
       transition: transform .15s, box-shadow .15s;
       margin-top: 1.25rem;
-      min-width: 14rem;
     }
 
     .ad-gate-btn:hover {
       transform: scale(1.03);
       box-shadow: 0 0 20px rgba(229, 57, 53, .35);
-    }
-
-    .ad-gate-btn:disabled {
-      opacity: .85;
-      cursor: wait;
-    }
-
-    .ad-gate-btn .btn-spinner {
-      width: 1rem;
-      height: 1rem;
-      border: 2px solid rgba(255,255,255,.3);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin .7s linear infinite;
-      display: none;
-    }
-
-    .ad-gate-btn.loading .btn-spinner {
-      display: inline-block;
-    }
-
-    .ad-timer {
-      font-size: .7rem;
-      color: rgba(255,255,255,.35);
-      margin-top: .6rem;
-      display: none;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .ad-timer.active {
-      display: block;
     }
 
     .ad-gate-close {
@@ -324,11 +289,8 @@
           <h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;">Assista um anuncio</h3>
           <p style="color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.6;">Abra um anuncio e depois volte para a
             pagina.</p>
-          <button class="ad-gate-btn" id="adGateBtn" onclick="watchAd()">
-            <span class="btn-spinner"></span>
-            <span id="adBtnText">Assistir anuncio</span>
-          </button>
-          <div class="ad-timer" id="adTimer"></div>
+          <button class="ad-gate-btn" id="adGateBtn" onclick="watchAd()">Assistir anuncio</button>
+          <br>
           <button class="ad-gate-close" onclick="history.back()">Voltar</button>
         </div>
       </div>
@@ -397,29 +359,9 @@
 
     function watchAd() {
       var btn = document.getElementById('adGateBtn');
-      var btnText = document.getElementById('adBtnText');
-      var timer = document.getElementById('adTimer');
-      var adDuration = 8;
-
-      btn.classList.add('loading');
-      btn.disabled = true;
-      btnText.textContent = 'Abrindo anuncio...';
+      btn.textContent = 'Carregando anuncio...';
 
       var adWindow = window.open('https://www.effectivecpmnetwork.com/gf2rkzyv6a?key=5a24611e71a9458466907f1a3998bd62', '_blank');
-
-      var remaining = adDuration;
-      timer.textContent = 'Volte em ' + remaining + 's para assitir o jogo';
-      timer.classList.add('active');
-
-      var countdown = setInterval(function () {
-        remaining--;
-        if (remaining > 0) {
-          timer.textContent = 'Volte em ' + remaining + 's para assitir o jogo';
-        } else {
-          clearInterval(countdown);
-          timer.textContent = 'Pronto! Volte para esta aba.';
-        }
-      }, 1000);
 
       var lost = false;
       function onBlur() { lost = true; }
@@ -432,12 +374,8 @@
           var poll = setInterval(function () {
             if (!document.hidden) {
               clearInterval(poll);
-              clearInterval(countdown);
               adWatched = true;
-              btn.classList.remove('loading');
-              btn.disabled = false;
-              btnText.textContent = 'Assistir anuncio';
-              timer.classList.remove('active');
+              btn.textContent = 'Assistir anuncio';
               document.getElementById('adGate').classList.remove('active');
               loadStream();
             }
@@ -447,16 +385,12 @@
 
       setTimeout(function () {
         clearInterval(check);
-        clearInterval(countdown);
         window.removeEventListener('blur', onBlur);
         adWatched = true;
-        btn.classList.remove('loading');
-        btn.disabled = false;
-        btnText.textContent = 'Assistir anuncio';
-        timer.classList.remove('active');
+        btn.textContent = 'Assistir anuncio';
         document.getElementById('adGate').classList.remove('active');
         loadStream();
-      }, (adDuration + 3) * 1000);
+      }, 8000);
     }
 
   </script>

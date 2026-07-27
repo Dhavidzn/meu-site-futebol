@@ -739,6 +739,38 @@ body {
   color: #fff;
 }
 
+.side-menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, .06);
+  margin: .5rem 1.25rem;
+}
+
+.side-menu-install {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: .5rem 1.25rem 0;
+  padding: .7rem 1rem;
+  font-size: .875rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #ff7a00, #e06600);
+  border: none;
+  border-radius: .65rem;
+  cursor: pointer;
+  transition: filter .2s, transform .2s;
+}
+
+.side-menu-install:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.side-menu-install.hidden {
+  display: none;
+}
+
 /* ================================
    SEARCH OVERLAY
    ================================ */

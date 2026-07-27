@@ -15,526 +15,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <script src="https://pl30524113.effectivecpmnetwork.com/23/f1/99/23f199c4271ee0a7552ab677424f918e.js" async></script>
-
-  <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #080808;
-      color: #ffffff;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #0d0d0d;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #2a2a2a;
-      border-radius: 4px;
-    }
-
-    .nav-blur {
-      background: rgba(8, 8, 8, 0.78);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-    }
-
-    @keyframes livePulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: .45;
-        transform: scale(.78);
-      }
-    }
-
-    .live-dot {
-      animation: livePulse 1.6s ease-in-out infinite;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .anim {
-      opacity: 0;
-    }
-
-    .anim.visible {
-      animation: fadeUp .7s cubic-bezier(.22, 1, .36, 1) forwards;
-    }
-
-    .anim-d1.visible {
-      animation-delay: .10s;
-    }
-
-    .anim-d2.visible {
-      animation-delay: .20s;
-    }
-
-    .anim-d3.visible {
-      animation-delay: .30s;
-    }
-
-    .anim-d4.visible {
-      animation-delay: .40s;
-    }
-
-    .anim-d5.visible {
-      animation-delay: .50s;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .625rem 1.25rem;
-      border-radius: .875rem;
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      background: rgba(255, 255, 255, 0.05);
-      color: rgba(255, 255, 255, .65);
-      font-size: .8125rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background .2s, border-color .2s, color .2s, transform .2s;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.09);
-      border-color: rgba(255, 255, 255, 0.18);
-      color: #fff;
-      transform: translateY(-1px);
-    }
-
-    .tab {
-      padding: .5rem 1rem;
-      border-radius: .75rem;
-      font-size: .8125rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, .4);
-      cursor: pointer;
-      transition: all .2s;
-      border: 1px solid transparent;
-      font-family: 'Inter', sans-serif;
-      background: none;
-    }
-
-    .tab:hover {
-      color: rgba(255, 255, 255, .75);
-      background: rgba(255, 255, 255, .05);
-    }
-
-    .tab.active {
-      background: #E53935;
-      color: #fff;
-    }
-
-    .live-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .3rem;
-      padding: .2rem .6rem;
-      border-radius: 99px;
-      background: rgba(229, 57, 53, .12);
-      border: 1px solid rgba(229, 57, 53, .28);
-      font-size: .625rem;
-      font-weight: 700;
-      color: #E53935;
-      letter-spacing: .06em;
-    }
-
-    .comp-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 1.25rem;
-      padding: 2rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      cursor: pointer;
-      transition: background .3s, border-color .3s, transform .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s;
-    }
-
-    .comp-card:hover {
-      background: rgba(255, 255, 255, 0.07);
-      border-color: rgba(255, 255, 255, 0.14);
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, .45);
-    }
-
-    .sep {
-      border-top: 1px solid rgba(255, 255, 255, 0.055);
-    }
-
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 800;
-      letter-spacing: -.035em;
-      line-height: 1.08;
-    }
-
-    /* Hero */
-    .hero-section {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      padding-top: 3.5rem;
-      background: url('imagens/fundo.png') center/cover no-repeat;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 48rem;
-      padding: 4rem 1.5rem;
-      text-align: left;
-    }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: 900;
-      letter-spacing: -.045em;
-      line-height: 1.05;
-    }
-
-    /* Game grid */
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: .625rem;
-      margin-top: .75rem;
-    }
-
-    .game-slot {
-      aspect-ratio: 1;
-      background: rgba(255, 255, 255, .92);
-      border-radius: .75rem;
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .game-slot:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
-    }
-
-    .game-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,.85));
-      padding: 1.5rem .5rem .5rem;
-      z-index: 2;
-    }
-
-    .game-info .gi-name {
-      font-size: .625rem;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .game-info .gi-time {
-      font-size: .5625rem;
-      font-weight: 500;
-      color: rgba(255,255,255,.6);
-      margin-top: .125rem;
-    }
-
-    @media (min-width: 769px) {
-      .game-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .game-grid.has-4 {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .day-sub {
-      margin-bottom: 1.25rem;
-      border-radius: .75rem;
-      padding: .75rem;
-    }
-
-    .day-sub-live {
-      background: rgba(229, 57, 53, .07);
-      border: 1px solid rgba(229, 57, 53, .18);
-    }
-
-    .day-sub-upcoming {
-      background: transparent;
-    }
-
-    .day-sub-finished {
-      background: rgba(255, 255, 255, .02);
-      border: 1px solid rgba(255, 255, 255, .04);
-      opacity: .55;
-    }
-
-    .day-sub-title {
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      margin-bottom: .625rem;
-      font-size: .6875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-
-    .day-sub-live .day-sub-title {
-      color: #E53935;
-    }
-
-    .day-sub-upcoming .day-sub-title {
-      color: rgba(255, 255, 255, .4);
-    }
-
-    .day-sub-finished .day-sub-title {
-      color: rgba(255, 255, 255, .22);
-    }
-
-    .slot-finished {
-      opacity: .5;
-    }
-
-    .slot-play {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      opacity: .85;
-      transition: opacity .2s, transform .2s;
-    }
-
-    .game-slot:hover .slot-play {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-
-    .slot-label {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      .hero-section {
-        min-height: 35vh;
-        height: 35vh;
-        max-height: 35vh;
-        background-position: center 30%;
-      }
-
-      .hero-inner {
-        padding: 4rem 1rem 1rem;
-      }
-
-      .hero-title {
-        font-size: clamp(1.75rem, 8vw, 2.5rem);
-      }
-
-      .hero-content {
-        padding: 1rem 1.25rem;
-        text-align: left;
-      }
-
-      .hero-content h1 {
-        margin-bottom: .75rem !important;
-      }
-
-      .hero-content p {
-        margin-bottom: 1rem !important;
-        font-size: .85rem !important;
-      }
-
-      .section-title {
-        font-size: clamp(1.25rem, 6vw, 1.75rem);
-      }
-
-      .game-grid {
-        grid-template-columns: 1fr;
-        gap: .75rem;
-      }
-
-      .game-slot {
-        aspect-ratio: auto;
-        height: 4.5rem;
-        border-radius: .75rem;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 0 1rem;
-        background: rgba(255, 255, 255, .06);
-        border: 1px solid rgba(255, 255, 255, .08);
-      }
-
-      .game-slot img {
-        height: 100%;
-        width: auto;
-        border-radius: .75rem;
-        object-fit: cover;
-      }
-
-      .slot-play {
-        position: static;
-        pointer-events: auto;
-        opacity: .7;
-        flex-shrink: 0;
-        margin-left: auto;
-      }
-
-      .slot-label {
-        display: block;
-        font-size: .875rem;
-        font-weight: 600;
-        color: #fff;
-        flex: 1;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .comp-card {
-        padding: 1.25rem 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-section {
-        min-height: 30vh;
-        height: 30vh;
-        max-height: 30vh;
-      }
-
-      .hero-inner {
-        padding: 3.5rem 1rem 1rem;
-      }
-
-      .hero-title {
-        font-size: 1.75rem;
-      }
-
-      .nav-links {
-        gap: 1rem !important;
-      }
-
-      .nav-links a {
-        font-size: .75rem !important;
-      }
-    }
-  </style>
-
 </head>
 
 <body>
 
-  <!-- ═══════════════ NAVIGATION ═══════════════ -->
-  <nav class="nav-blur" style="position:fixed;top:0;left:0;right:0;z-index:50;">
-    <div
-      style="max-width:72rem;margin:0 auto;padding:0 1.5rem;height:3.5rem;display:flex;align-items:center;justify-content:space-between;">
-
-      <a href="#" style="display:flex;align-items:center;gap:.625rem;text-decoration:none;user-select:none;">
-        <div
-          style="width:1.75rem;height:1.75rem;border-radius:50%;border:1.5px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;">
-          <div
-            style="width:1.1rem;height:1.1rem;border-radius:50%;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;">
-            <div
-              style="width:5px;height:5px;background:#E53935;border-radius:50%;box-shadow:0 0 8px rgba(229,57,53,.6);">
-            </div>
-          </div>
-        </div>
-        <div style="line-height:1;">
-          <div style="font-size:.7rem;font-weight:800;letter-spacing:.14em;color:#fff;">PLACAR</div>
-          <div style="font-size:.55rem;font-weight:600;letter-spacing:.2em;color:#E53935;margin-top:1px;">AO VIVO</div>
-        </div>
+  <!-- ═══════════════ HERO HEADER ═══════════════ -->
+  <header class="hero-header">
+    <div class="hero-header-inner">
+      <button class="hero-hamburger" id="menuBtn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a href="#" class="hero-logo-link">
+        <img src="hero/Ao vivo.png" alt="Futebol Todo Dia" class="hero-logo">
       </a>
-
-      <div style="display:flex;align-items:center;gap:1.75rem;" class="nav-links">
-        <a href="#live" style="font-size:.8125rem;font-weight:500;color:#E53935;text-decoration:none;">Ao vivo</a>
-        <a href="#competitions"
-          style="font-size:.8125rem;font-weight:500;color:rgba(255,255,255,.42);text-decoration:none;transition:color .2s;"
-          onmouseover="this.style.color='rgba(255,255,255,.8)'"
-          onmouseout="this.style.color='rgba(255,255,255,.42)'">Competições</a>
-      </div>
-
+      <button class="hero-search" id="searchBtn" aria-label="Pesquisar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
     </div>
-  </nav>
+  </header>
 
 
   <!-- ═══════════════ HERO ═══════════════ -->
-  <section class="hero-section">
+  <section class="hero">
+    <div class="hero-glow hero-glow--purple"></div>
+    <div class="hero-glow hero-glow--red"></div>
+    <div class="hero-glow hero-glow--orange"></div>
 
-    <div class="hero-inner" style="max-width:72rem;margin:0 auto;padding:5rem 1.5rem;width:100%;">
-      <div class="hero-content">
-        <div class="anim" style="display:flex;align-items:center;gap:.5rem;margin-bottom:2rem;">
-          <div class="live-dot" style="width:.5rem;height:.5rem;border-radius:50%;background:#E53935;flex-shrink:0;">
-          </div>
-          <span
-            style="font-size:.6875rem;font-weight:600;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;">Ao
-            vivo agora</span>
-        </div>
+    <div class="hero-content">
+      <h1 class="hero-title">Futebol todo dia - Assistir futebol Online grátis</h1>
+      <p class="hero-subtitle">Assista futebol ao vivo em HD, acompanhe os principais campeonatos com transmissão rápida, sem travamentos e sem anúncios abusivos.</p>
+    </div>
 
-        <h1 class="hero-title anim anim-d1" style="margin-bottom:1.5rem;">
-          Acompanhe os jogos <span style="color:#E53935;">ao vivo</span>
-        </h1>
-
-        <p class="anim anim-d2"
-          style="font-size:1rem;color:rgba(255,255,255,.4);line-height:1.75;max-width:28rem;margin-bottom:2.5rem;">
-          Resultados em tempo real de todas as competições.
-        </p>
-
-        <div class="anim anim-d3">
-          <button class="btn" onclick="document.getElementById('live').scrollIntoView({behavior:'smooth'})">
-            Ver jogos ao vivo <span style="color:rgba(255,255,255,.28);font-size:1rem;">›</span>
-          </button>
-        </div>
-      </div>
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack"></div>
     </div>
   </section>
 
@@ -775,39 +295,10 @@
 
 
   <script>
-    /* Scroll reveal with section focus */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
-
-    /* Smooth nav */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-
     /* ========================================
        ADICIONE SEUS IFRAMES AQUI
        ======================================== */
     const games = {
-      'Sábado — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=primevideo',
-      'Sábado — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere',
-      'Sábado — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=globorj',
-      'Domingo — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=globosp',
-      'Domingo — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=globomg',
-      'Domingo — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=premiere',
-      'Domingo — Jogo 4': 'https://sinalpublicoetv.vercel.app/?id=premiere2',
-      'Domingo — Jogo 5': 'https://sinalpublicoetv.vercel.app/?id=premiere5',
-      'Domingo — Jogo 6': 'https://sinalpublicoetv.vercel.app/?id=sportv',
-      'Domingo — Jogo 7': 'https://sinalpublicoetv.vercel.app/?id=premiere6',
       'Segunda — Jogo 1': '',
       'Segunda — Jogo 2': '',
       'Segunda — Jogo 3': '',
@@ -824,16 +315,6 @@
        ADICIONE AS IMAGENS DOS JOGOS AQUI
        ======================================== */
     const gameImages = {
-      'Sábado — Jogo 1': 'imagens/1.jpeg',
-      'Sábado — Jogo 2': 'imagens/2.jpeg',
-      'Sábado — Jogo 3': 'imagens/3.jpeg',
-      'Domingo — Jogo 1': 'imagens/4.jpeg',
-      'Domingo — Jogo 2': 'imagens/5.jpeg',
-      'Domingo — Jogo 3': 'imagens/6.jpeg',
-      'Domingo — Jogo 4': 'imagens/7.jpeg',
-      'Domingo — Jogo 5': 'imagens/8.jpeg',
-      'Domingo — Jogo 6': 'imagens/9.jpeg',
-      'Domingo — Jogo 7': 'imagens/10.jpeg',
       'Segunda — Jogo 1': 'imagens/11.jpeg',
       'Segunda — Jogo 2': 'imagens/12.jpeg',
       'Segunda — Jogo 3': 'imagens/13.jpeg',
@@ -847,16 +328,6 @@
     };
 
     const gameMeta = {
-      'Sábado — Jogo 1': { name: '', date: '25/07', time: '' },
-      'Sábado — Jogo 2': { name: '', date: '25/07', time: '' },
-      'Sábado — Jogo 3': { name: '', date: '25/07', time: '' },
-      'Domingo — Jogo 1': { name: 'Bahia x Corinthians', date: '26/07', time: '16:00' },
-      'Domingo — Jogo 2': { name: 'Cruzeiro x Botafogo', date: '26/07', time: '16:00' },
-      'Domingo — Jogo 3': { name: 'Flamengo x São Paulo', date: '26/07', time: '18:30' },
-      'Domingo — Jogo 4': { name: 'Grêmio x Fluminense', date: '26/07', time: '18:30' },
-      'Domingo — Jogo 5': { name: 'Bragantino x Coritiba', date: '26/07', time: '18:30' },
-      'Domingo — Jogo 6': { name: 'Palmeiras x Atlético-MG', date: '26/07', time: '19:30' },
-      'Domingo — Jogo 7': { name: 'Remo x Vitória', date: '26/07', time: '19:30' },
       'Segunda — Jogo 1': { name: 'Atlético-GO x Operário', date: '27/07', time: '19:30' },
       'Segunda — Jogo 2': { name: 'CRB x Vila Nova', date: '27/07', time: '19:30' },
       'Segunda — Jogo 3': { name: 'Sport Recife x Cuiabá', date: '27/07', time: '19:30' },
@@ -1097,6 +568,8 @@
       window.location.href = 'player.html?jogo=' + encodeURIComponent(label);
     }
   </script>
+
+  <script src="script.js"></script>
 </body>
 
 </html>

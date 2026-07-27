@@ -5,10 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Placar Ao Vivo — Resultados em tempo real</title>
-  <meta name="description" content="Acompanhe jogos ao vivo de futebol grátis. Placar ao vivo do Brasileirão, Premier League, Champions League, Copa Libertadores e La Liga. Resultados em tempo real e transmissões ao vivo." />
-  <meta name="keywords" content="jogos ao vivo, assistir jogos ao vivo, placar ao vivo, futebol ao vivo, transmissão ao vivo, brasileirão ao vivo, premier league ao vivo, champions league ao vivo, copa libertadores ao vivo, la liga ao vivo, assistir futebol grátis, futebol todo dia, futebol todo dia ao vivo" />
+  <meta name="description"
+    content="Acompanhe jogos ao vivo de futebol grátis. Placar ao vivo do Brasileirão, Premier League, Champions League, Copa Libertadores e La Liga. Resultados em tempo real e transmissões ao vivo." />
+  <meta name="keywords"
+    content="jogos ao vivo, assistir jogos ao vivo, placar ao vivo, futebol ao vivo, transmissão ao vivo, brasileirão ao vivo, premier league ao vivo, champions league ao vivo, copa libertadores ao vivo, la liga ao vivo, assistir futebol grátis, futebol todo dia, futebol todo dia ao vivo" />
   <meta property="og:title" content="Futebol Todo Dia — Assistir Jogos Ao Vivo | Futebol em Tempo Real" />
-  <meta property="og:description" content="Assistir jogos ao vivo grátis. Placar ao vivo de todas as competições: Brasileirão, Premier League, Champions League, Libertadores e La Liga." />
+  <meta property="og:description"
+    content="Assistir jogos ao vivo grátis. Placar ao vivo de todas as competições: Brasileirão, Premier League, Champions League, Libertadores e La Liga." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
   <link rel="manifest" href="manifest.json" />
@@ -39,7 +42,8 @@
         <img src="hero/Ao vivo.png" alt="Futebol Todo Dia" class="hero-logo">
       </a>
       <button class="hero-search" id="searchBtn" aria-label="Pesquisar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
@@ -53,7 +57,11 @@
     <div class="side-menu-header">
       <span class="side-menu-title">Menu</span>
       <button class="side-menu-close" id="menuClose" aria-label="Fechar menu">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
     </div>
     <a href="#live" class="side-menu-link">Ao vivo</a>
@@ -61,10 +69,11 @@
     <a href="#sobre" class="side-menu-link">Sobre</a>
     <div class="side-menu-divider"></div>
     <button class="side-menu-install hidden" id="installBtn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
       </svg>
       Baixar App
     </button>
@@ -73,13 +82,19 @@
   <!-- ═══════════════ BARRA DE PESQUISA ═══════════════ -->
   <div class="search-overlay" id="searchOverlay">
     <div class="search-bar">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input type="text" id="searchInput" class="search-input" placeholder="Buscar campeonato ou jogo..." autocomplete="off">
+      <input type="text" id="searchInput" class="search-input" placeholder="Buscar campeonato ou jogo..."
+        autocomplete="off">
       <button class="search-close" id="searchClose" aria-label="Fechar pesquisa">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
     </div>
     <div class="search-results" id="searchResults"></div>
@@ -94,7 +109,8 @@
 
     <div class="hero-content">
       <h1 class="hero-title">Futebol todo dia - Assistir futebol Online grátis</h1>
-      <p class="hero-subtitle">Assista futebol ao vivo em HD, acompanhe os principais campeonatos com transmissão rápida, sem travamentos e sem anúncios abusivos.</p>
+      <p class="hero-subtitle">Assista futebol ao vivo em HD, acompanhe os principais campeonatos com transmissão
+        rápida, sem travamentos e sem anúncios abusivos.</p>
     </div>
 
     <div class="carousel">
@@ -128,19 +144,23 @@
 
   <!-- ═══════════════ BAIXAR APP ═══════════════ -->
   <section class="install-banner" id="installBanner">
-    <div style="max-width:72rem;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div
+      style="max-width:72rem;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
       <div style="display:flex;align-items:center;gap:.75rem;">
-        <img src="hero/icon-pwa.png" alt="App" style="width:2.75rem;height:2.75rem;border-radius:.75rem;border:1px solid rgba(255,255,255,.1);">
+        <img src="hero/icon-pwa.png" alt="App"
+          style="width:2.75rem;height:2.75rem;border-radius:.75rem;border:1px solid rgba(255,255,255,.1);">
         <div>
           <p style="font-size:.9375rem;font-weight:700;color:#fff;">Baixar o app</p>
-          <p style="font-size:.75rem;color:rgba(255,255,255,.4);">Instale e assista futebol direto na sua tela inicial</p>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.4);">Instale e assista futebol direto na sua tela inicial
+          </p>
         </div>
       </div>
       <button class="btn-install" id="btnInstall">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
         Instalar
       </button>
@@ -162,7 +182,10 @@
         <p style="font-size:.8125rem;color:rgba(255,255,255,.28);">Acompanhe seus campeonatos favoritos</p>
       </div>
 
-      <p class="anim" style="font-size:.875rem;color:rgba(255,255,255,.22);line-height:1.7;margin-bottom:2rem;max-width:48rem;">O Futebol Todo Dia reúne as principais competições de futebol do mundo em uma só plataforma. Confira abaixo os campeonatos disponíveis com transmissão ao vivo, resultados e classificações atualizados em tempo real.</p>
+      <p class="anim"
+        style="font-size:.875rem;color:rgba(255,255,255,.22);line-height:1.7;margin-bottom:2rem;max-width:48rem;">O
+        Futebol Todo Dia reúne as principais competições de futebol do mundo em uma só plataforma. Confira abaixo os
+        campeonatos disponíveis com transmissão ao vivo, resultados e classificações atualizados em tempo real.</p>
 
       <div class="anim anim-d1"
         style="display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:1rem;margin-bottom:2.5rem;">
@@ -170,13 +193,16 @@
         <div class="comp-card">
           <div
             style="width:4.55rem;height:4.55rem;border-radius:1.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="hero/Brasileirão série a.png" alt="Brasileirão" style="width:100%;height:100%;object-fit:cover;" />
+            <img src="hero/Brasileirão série a.png" alt="Brasileirão"
+              style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div style="text-align:center;">
             <p style="font-size:.8125rem;font-weight:600;color:#fff;line-height:1.3;">Brasileirão</p>
             <p style="font-size:.7rem;color:rgba(255,255,255,.32);margin-top:.25rem;">Série A</p>
           </div>
-          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">Acompanhe o Brasileirão Série A ao vivo com todos os jogos, placares em tempo real e classificação atualizada.</p>
+          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">
+            Acompanhe o Brasileirão Série A ao vivo com todos os jogos, placares em tempo real e classificação
+            atualizada.</p>
         </div>
 
         <div class="comp-card">
@@ -188,7 +214,9 @@
             <p style="font-size:.8125rem;font-weight:600;color:#fff;line-height:1.3;">Premier</p>
             <p style="font-size:.7rem;color:rgba(255,255,255,.32);margin-top:.25rem;">League</p>
           </div>
-          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">A liga inglesa é a mais intensa do mundo. Assista aos clássicos e grandes batalhas do futebol inglês ao vivo.</p>
+          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">A
+            liga inglesa é a mais intensa do mundo. Assista aos clássicos e grandes batalhas do futebol inglês ao vivo.
+          </p>
         </div>
 
         <div class="comp-card">
@@ -200,20 +228,21 @@
             <p style="font-size:.8125rem;font-weight:600;color:#fff;line-height:1.3;">Champions</p>
             <p style="font-size:.7rem;color:rgba(255,255,255,.32);margin-top:.25rem;">League</p>
           </div>
-          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">O torneio mais prestigiado da Europa. Confrontos eletrizantes entre os maiores clubes do mundo.</p>
+          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">O
+            torneio mais prestigiado da Europa. Confrontos eletrizantes entre os maiores clubes do mundo.</p>
         </div>
 
         <div class="comp-card">
           <div
             style="width:4.55rem;height:4.55rem;border-radius:1.25rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-            <img src="hero/Libertadores.png" alt="Copa Libertadores"
-              style="width:100%;height:100%;object-fit:cover;" />
+            <img src="hero/Libertadores.png" alt="Copa Libertadores" style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div style="text-align:center;">
             <p style="font-size:.8125rem;font-weight:600;color:#fff;line-height:1.3;">Copa</p>
             <p style="font-size:.7rem;color:rgba(255,255,255,.32);margin-top:.25rem;">Libertadores</p>
           </div>
-          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">A maior competição de clubes da América do Sul. Acompanhe todos os jogos ao vivo.</p>
+          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">A
+            maior competição de clubes da América do Sul. Acompanhe todos os jogos ao vivo.</p>
         </div>
 
         <div class="comp-card">
@@ -225,7 +254,8 @@
             <p style="font-size:.8125rem;font-weight:600;color:#fff;line-height:1.3;">La Liga</p>
             <p style="font-size:.7rem;color:rgba(255,255,255,.32);margin-top:.25rem;">España</p>
           </div>
-          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">Futebol técnico e habilidoso. Confrontos históricos como Barcelona x Real Madrid ao vivo.</p>
+          <p style="font-size:.6875rem;color:rgba(255,255,255,.2);line-height:1.4;margin-top:.5rem;text-align:center;">
+            Futebol técnico e habilidoso. Confrontos históricos como Barcelona x Real Madrid ao vivo.</p>
         </div>
 
       </div>
@@ -253,19 +283,26 @@
       <div class="anim" style="margin-bottom:3rem;">
         <div style="display:flex;align-items:center;gap:.625rem;margin-bottom:.5rem;">
           <h2 class="section-title">Sobre o Futebol Todo Dia</h2>
-          <div style="width:.5rem;height:.5rem;border-radius:50%;background:#E53935;flex-shrink:0;margin-bottom:.25rem;"></div>
+          <div
+            style="width:.5rem;height:.5rem;border-radius:50%;background:#E53935;flex-shrink:0;margin-bottom:.25rem;">
+          </div>
         </div>
-        <p style="font-size:.8125rem;color:rgba(255,255,255,.28);">Seu futebol favorito, todos os dias, sem complicação</p>
+        <p style="font-size:.8125rem;color:rgba(255,255,255,.28);">Seu futebol favorito, todos os dias, sem complicação
+        </p>
       </div>
 
       <div class="anim anim-d1" style="display:grid;grid-template-columns:1fr;gap:2.5rem;max-width:64rem;">
 
         <div>
           <p style="font-size:.9375rem;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:1.25rem;">
-            O <strong style="color:#E53935;">Futebol Todo Dia</strong> nasceu para quem não abre mão de acompanhar os jogos ao vivo, onde quer que esteja. Com uma interface limpa e rápida, você acessa a programação completa da semana, escolhe o jogo e assiste direto no navegador — sem complicação, sem cadastro, sem burocracia.
+            O <strong style="color:#E53935;">Futebol Todo Dia</strong> nasceu para quem não abre mão de acompanhar os
+            jogos ao vivo, onde quer que esteja. Com uma interface limpa e rápida, você acessa a programação completa da
+            semana, escolhe o jogo e assiste direto no navegador — sem complicação, sem cadastro, sem burocracia.
           </p>
           <p style="font-size:.9375rem;color:rgba(255,255,255,.55);line-height:1.8;">
-            Aqui você encontra transmissões ao vivo dos maiores campeonatos do mundo, do Brasileirão à Champions League, passando por Premier League, La Liga, Copa Libertadores e muito mais. Os horários são atualizados automaticamente e os jogos do dia sempre aparecem em destaque.
+            Aqui você encontra transmissões ao vivo dos maiores campeonatos do mundo, do Brasileirão à Champions League,
+            passando por Premier League, La Liga, Copa Libertadores e muito mais. Os horários são atualizados
+            automaticamente e os jogos do dia sempre aparecem em destaque.
           </p>
         </div>
 
@@ -273,34 +310,46 @@
           <h3 style="font-size:1.125rem;font-weight:700;color:#fff;margin-bottom:1rem;">Campeonatos disponíveis</h3>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;">
 
-            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
+            <div
+              style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
               <p style="font-size:.8125rem;font-weight:700;color:#E53935;margin-bottom:.375rem;">Brasileirão</p>
-              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">Série A e Série B com todos os jogos da rodada, placares ao vivo e classificação atualizada.</p>
+              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">Série A e Série B com todos os
+                jogos da rodada, placares ao vivo e classificação atualizada.</p>
             </div>
 
-            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
+            <div
+              style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
               <p style="font-size:.8125rem;font-weight:700;color:#E53935;margin-bottom:.375rem;">Champions League</p>
-              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">Os maiores clubes da Europa em confrontos de alto nível técnico. Oitavas, quartas, semi e final ao vivo.</p>
+              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">Os maiores clubes da Europa em
+                confrontos de alto nível técnico. Oitavas, quartas, semi e final ao vivo.</p>
             </div>
 
-            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
+            <div
+              style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
               <p style="font-size:.8125rem;font-weight:700;color:#E53935;margin-bottom:.375rem;">Premier League</p>
-              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">A liga mais intensa do planeta. Clássicos eletrizantes e uma rivalidade que empolga milhões.</p>
+              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">A liga mais intensa do
+                planeta. Clássicos eletrizantes e uma rivalidade que empolga milhões.</p>
             </div>
 
-            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
+            <div
+              style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
               <p style="font-size:.8125rem;font-weight:700;color:#E53935;margin-bottom:.375rem;">La Liga</p>
-              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">Futebol técnico e habilidoso. Barcelona, Real Madrid e os grandes clubes espanhóis ao vivo.</p>
+              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">Futebol técnico e habilidoso.
+                Barcelona, Real Madrid e os grandes clubes espanhóis ao vivo.</p>
             </div>
 
-            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
+            <div
+              style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
               <p style="font-size:.8125rem;font-weight:700;color:#E53935;margin-bottom:.375rem;">Copa Libertadores</p>
-              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">A maior competição de clubes da América do Sul. Emoção garantida em cada fase.</p>
+              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">A maior competição de clubes
+                da América do Sul. Emoção garantida em cada fase.</p>
             </div>
 
-            <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
+            <div
+              style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.25rem;">
               <p style="font-size:.8125rem;font-weight:700;color:#E53935;margin-bottom:.375rem;">Serie A</p>
-              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">A calcio italiana com Juventus, Milan, Inter e os clubes que fazem história a cada temporada.</p>
+              <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.65;">A calcio italiana com
+                Juventus, Milan, Inter e os clubes que fazem história a cada temporada.</p>
             </div>
 
           </div>
@@ -308,31 +357,42 @@
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem;">
 
-          <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.5rem;">
+          <div
+            style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.5rem;">
             <p style="font-size:.875rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Fácil de usar</p>
-            <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.7;">Escolha o jogo, clique e assista. A navegação é rápida e organizada para você chegar onde quer sem perda de tempo.</p>
+            <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.7;">Escolha o jogo, clique e assista.
+              A navegação é rápida e organizada para você chegar onde quer sem perda de tempo.</p>
           </div>
 
-          <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.5rem;">
+          <div
+            style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.5rem;">
             <p style="font-size:.875rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Qualidade de imagem</p>
-            <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.7;">Transmissões estáveis e com ótima definição. Para a melhor experiência, tenha uma internet boa e estável.</p>
+            <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.7;">Transmissões estáveis e com ótima
+              definição. Para a melhor experiência, tenha uma internet boa e estável.</p>
           </div>
 
-          <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.5rem;">
+          <div
+            style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.5rem;">
             <p style="font-size:.875rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Funciona em tudo</p>
-            <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.7;">Celular, tablet, notebook ou desktop. O site se adapta a qualquer tela para você assistir de onde preferir.</p>
+            <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.7;">Celular, tablet, notebook ou
+              desktop. O site se adapta a qualquer tela para você assistir de onde preferir.</p>
           </div>
 
-          <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.5rem;">
+          <div
+            style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:1.5rem;">
             <p style="font-size:.875rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Sempre atualizado</p>
-            <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.7;">A programação da semana é atualizada automaticamente. Jogos passados saem, novos jogos entram — tudo no automatico.</p>
+            <p style="font-size:.8125rem;color:rgba(255,255,255,.38);line-height:1.7;">A programação da semana é
+              atualizada automaticamente. Jogos passados saem, novos jogos entram — tudo no automatico.</p>
           </div>
 
         </div>
 
-        <div style="background:rgba(229,57,53,.06);border:1px solid rgba(229,57,53,.15);border-radius:.75rem;padding:1.5rem;margin-top:.5rem;">
+        <div
+          style="background:rgba(229,57,53,.06);border:1px solid rgba(229,57,53,.15);border-radius:.75rem;padding:1.5rem;margin-top:.5rem;">
           <p style="font-size:.9375rem;color:rgba(255,255,255,.6);line-height:1.8;">
-            <strong style="color:#E53935;">Futebol Todo Dia</strong> — feito para quem vive o esporte todos os dias. Acompanhe os jogos ao vivo, confira os placares e não perca nenhum lance dos seus campeonatos favoritos. Tudo gratuito, rápido e do jeito que o torcedor merece.
+            <strong style="color:#E53935;">Futebol Todo Dia</strong> — feito para quem vive o esporte todos os dias.
+            Acompanhe os jogos ao vivo, confira os placares e não perca nenhum lance dos seus campeonatos favoritos.
+            Tudo gratuito, rápido e do jeito que o torcedor merece.
           </p>
         </div>
 
@@ -365,9 +425,9 @@
        ADICIONE SEUS IFRAMES AQUI
        ======================================== */
     const games = {
-      'Segunda — Jogo 1': '',
-      'Segunda — Jogo 2': '',
-      'Segunda — Jogo 3': '',
+      'Segunda — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=disneyplus1',
+      'Segunda — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=espn',
+      'Segunda — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=disneyplus2',
       'Terça — Jogo 1': '',
       'Terça — Jogo 2': '',
       'Terça — Jogo 3': '',

@@ -627,6 +627,22 @@ body {
   color: rgba(255, 255, 255, .22);
 }
 
+.day-sub .day-sub {
+  background: none;
+  border: none;
+  opacity: 1;
+  padding: 0;
+}
+
+.day-sub .day-sub .day-sub-title {
+  font-size: .625rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .28);
+  text-transform: none;
+  letter-spacing: .02em;
+  margin-bottom: .5rem;
+}
+
 .slot-finished {
   opacity: .5;
 }

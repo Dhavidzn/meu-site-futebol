@@ -462,20 +462,20 @@
     };
 
     const gameMeta = {
-      'Segunda — Jogo 1': { name: 'Atlético-GO x Operário', date: '27/07', time: '19:30' },
-      'Segunda — Jogo 2': { name: 'CRB x Vila Nova', date: '27/07', time: '19:30' },
-      'Segunda — Jogo 3': { name: 'Sport Recife x Cuiabá', date: '27/07', time: '19:30' },
-      'Terça — Jogo 1': { name: 'Juventude x Avaí', date: '28/07', time: '19:30' },
-      'Terça — Jogo 2': { name: 'Ponte Preta x Athletic', date: '28/07', time: '19:30' },
-      'Terça — Jogo 3': { name: 'Fortaleza x Botafogo-SP', date: '28/07', time: '21:45' },
-      'Terça — Jogo 4': { name: 'Santos x Universidad de Venezuela', date: '28/07', time: '21:30' },
-      'Quarta — Jogo 1': { name: 'Internacional x Flamengo', date: '29/07', time: '19:30' },
-      'Quarta — Jogo 2': { name: 'Mirassol x Remo', date: '29/07', time: '19:30' },
-      'Quarta — Jogo 3': { name: 'Fluminense x Bahia', date: '29/07', time: '21:30' },
-      'Quarta — Jogo 4': { name: 'Vitória x Palmeiras', date: '29/07', time: '21:30' },
-      'Quarta — Jogo 5': { name: 'Vasco x Independiente del Medellín', date: '29/07', time: '19:00' },
-      'Quarta — Jogo 6': { name: 'Bragantino x Sporting Cristal', date: '29/07', time: '21:30' },
-      'Quinta — Jogo 1': { name: 'Grêmio x Bolívar', date: '30/07', time: '19:00' }
+      'Segunda — Jogo 1': { name: 'Atlético-GO x Operário', date: '27/07', time: '19:30', comp: 'Brasileirão Série B' },
+      'Segunda — Jogo 2': { name: 'CRB x Vila Nova', date: '27/07', time: '19:30', comp: 'Brasileirão Série B' },
+      'Segunda — Jogo 3': { name: 'Sport Recife x Cuiabá', date: '27/07', time: '19:30', comp: 'Brasileirão Série B' },
+      'Terça — Jogo 1': { name: 'Juventude x Avaí', date: '28/07', time: '19:30', comp: 'Brasileirão Série B' },
+      'Terça — Jogo 2': { name: 'Ponte Preta x Athletic', date: '28/07', time: '19:30', comp: 'Brasileirão Série B' },
+      'Terça — Jogo 3': { name: 'Fortaleza x Botafogo-SP', date: '28/07', time: '21:45', comp: 'Brasileirão Série B' },
+      'Terça — Jogo 4': { name: 'Santos x Universidad de Venezuela', date: '28/07', time: '21:30', comp: 'Copa Sul-Americana' },
+      'Quarta — Jogo 1': { name: 'Internacional x Flamengo', date: '29/07', time: '19:30', comp: 'Brasileirão Série A' },
+      'Quarta — Jogo 2': { name: 'Mirassol x Remo', date: '29/07', time: '19:30', comp: 'Brasileirão Série B' },
+      'Quarta — Jogo 3': { name: 'Fluminense x Bahia', date: '29/07', time: '21:30', comp: 'Brasileirão Série A' },
+      'Quarta — Jogo 4': { name: 'Vitória x Palmeiras', date: '29/07', time: '21:30', comp: 'Brasileirão Série A' },
+      'Quarta — Jogo 5': { name: 'Vasco x Independiente del Medellín', date: '29/07', time: '19:00', comp: 'Copa Sul-Americana' },
+      'Quarta — Jogo 6': { name: 'Bragantino x Sporting Cristal', date: '29/07', time: '21:30', comp: 'Copa Sul-Americana' },
+      'Quinta — Jogo 1': { name: 'Grêmio x Bolívar', date: '30/07', time: '19:00', comp: 'Copa Sul-Americana' }
     };
 
     /* ========================================
@@ -634,30 +634,57 @@
             '<h3 style="font-size:1rem;font-weight:700;color:rgba(255,255,255,.7);">' + dayName + ' <span style="font-weight:400;color:rgba(255,255,255,.35);font-size:.8125rem;">' + dateLabel + '</span></h3>' +
             badge + '</div>';
 
+          function groupByComp(arr) {
+            var groups = {};
+            var order = [];
+            for (var i = 0; i < arr.length; i++) {
+              var k = arr[i].key;
+              var meta = gameMeta[k] || {};
+              var comp = meta.comp || 'Outros';
+              if (!groups[comp]) { groups[comp] = []; order.push(comp); }
+              groups[comp].push(arr[i]);
+            }
+            return { groups: groups, order: order };
+          }
+
+          function buildCompSection(title, slots, icon) {
+            var h = '<div class="day-sub"><div class="day-sub-title">' + icon + ' ' + title + '</div>' +
+              '<div class="game-grid' + (slots.length >= 4 ? ' has-4' : '') + '">';
+            for (var i = 0; i < slots.length; i++) h += slots[i].html;
+            h += '</div></div>';
+            return h;
+          }
+
           var bodyHTML = '';
+          var liveIcon = '<span class="live-dot" style="width:5px;height:5px;border-radius:50%;background:#E53935;flex-shrink:0;"></span>';
+          var upcomingIcon = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>';
+          var finishedIcon = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>';
 
           if (liveGames.length > 0) {
-            bodyHTML += '<div class="day-sub day-sub-live"><div class="day-sub-title">' +
-              '<span class="live-dot" style="width:5px;height:5px;border-radius:50%;background:#E53935;flex-shrink:0;"></span> AO VIVO AGORA</div>' +
-              '<div class="game-grid' + (liveGames.length >= 4 ? ' has-4' : '') + '">';
-            for (var i = 0; i < liveGames.length; i++) bodyHTML += liveGames[i].html;
-            bodyHTML += '</div></div>';
+            var lg = groupByComp(liveGames);
+            bodyHTML += '<div class="day-sub day-sub-live"><div class="day-sub-title">' + liveIcon + ' AO VIVO AGORA</div>';
+            for (var c = 0; c < lg.order.length; c++) {
+              bodyHTML += buildCompSection(lg.order[c], lg.groups[lg.order[c]], '');
+            }
+            bodyHTML += '</div>';
           }
 
           if (upcomingGames.length > 0) {
-            bodyHTML += '<div class="day-sub day-sub-upcoming"><div class="day-sub-title">' +
-              '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg> PRÓXIMOS</div>' +
-              '<div class="game-grid' + (upcomingGames.length >= 4 ? ' has-4' : '') + '">';
-            for (var i = 0; i < upcomingGames.length; i++) bodyHTML += upcomingGames[i].html;
-            bodyHTML += '</div></div>';
+            var ug = groupByComp(upcomingGames);
+            bodyHTML += '<div class="day-sub day-sub-upcoming"><div class="day-sub-title">' + upcomingIcon + ' PRÓXIMOS</div>';
+            for (var c = 0; c < ug.order.length; c++) {
+              bodyHTML += buildCompSection(ug.order[c], ug.groups[ug.order[c]], '');
+            }
+            bodyHTML += '</div>';
           }
 
           if (finishedGames.length > 0) {
-            bodyHTML += '<div class="day-sub day-sub-finished"><div class="day-sub-title">' +
-              '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg> ENCERRADOS</div>' +
-              '<div class="game-grid' + (finishedGames.length >= 4 ? ' has-4' : '') + '">';
-            for (var i = 0; i < finishedGames.length; i++) bodyHTML += finishedGames[i].html;
-            bodyHTML += '</div></div>';
+            var fg = groupByComp(finishedGames);
+            bodyHTML += '<div class="day-sub day-sub-finished"><div class="day-sub-title">' + finishedIcon + ' ENCERRADOS</div>';
+            for (var c = 0; c < fg.order.length; c++) {
+              bodyHTML += buildCompSection(fg.order[c], fg.groups[fg.order[c]], '');
+            }
+            bodyHTML += '</div>';
           }
 
           section.innerHTML = headerHTML + bodyHTML;

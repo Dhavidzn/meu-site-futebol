@@ -1,4 +1,4 @@
-const CACHE_NAME = 'futebol-v1';
+const CACHE_NAME = 'futebol-v2';
 const ASSETS = [
   '/',
   '/index.html',

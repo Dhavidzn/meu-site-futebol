@@ -195,17 +195,29 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     deferredPrompt = e;
     if (installBtn) installBtn.classList.remove('hidden');
-    if (installBanner) installBanner.classList.remove('hidden');
   });
 
   function runInstall() {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => {
-      deferredPrompt = null;
-      if (installBtn) installBtn.classList.add('hidden');
-      if (installBanner) installBanner.classList.add('hidden');
-    });
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        if (installBtn) installBtn.classList.add('hidden');
+        if (installBanner) installBanner.classList.add('hidden');
+      });
+      return;
+    }
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+    let msg = 'Para instalar:\n\n';
+    if (isIOS) {
+      msg += '1. Toque no botão Compartilhar (ícone de caixa com seta)\n2. Role para baixo e toque em "Adicionar à Tela de Início"\n3. Toque em "Adicionar"';
+    } else if (isAndroid) {
+      msg += '1. Toque nos 3 pontinhos do Chrome (canto superior)\n2. Toque em "Instalar app" ou "Adicionar à tela inicial"\n3. Confirme';
+    } else {
+      msg += '1. Clique nos 3 pontinhos do navegador (canto superior direito)\n2. Clique em "Instalar Futebol Todo Dia" ou "Adicionar à barra de ferramentas"';
+    }
+    alert(msg);
   }
 
   if (installBtn) installBtn.addEventListener('click', runInstall);

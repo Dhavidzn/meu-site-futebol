@@ -1,4 +1,4 @@
-const CACHE_NAME = 'futebol-v2';
+const CACHE_NAME = 'futebol-v3';
 const ASSETS = [
   '/',
   '/index.html',
@@ -6,7 +6,7 @@ const ASSETS = [
   '/script.js',
   '/manifest.json',
   '/hero/Ao vivo.png',
-  '/hero/icon-pwa.png',
+  '/hero/icon-pwa.png?v=2',
   '/hero/Libertadores.png',
   '/hero/Champions.png',
   '/hero/Premier league.png',
@@ -18,17 +18,17 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', e => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(ASSETS))
-      .then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+      Promise.all(keys.map(k => caches.delete(k)))
     ).then(() => self.clients.claim())
   );
 });

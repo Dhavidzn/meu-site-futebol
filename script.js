@@ -183,9 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
      PWA — SERVICE WORKER + INSTALL
      ======================================== */
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(reg => {
-      reg.update();
-    }).catch(() => {});
+    navigator.serviceWorker.getRegistrations().then(regs => {
+      regs.forEach(r => r.unregister());
+    });
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
   }
 
   let deferredPrompt = null;

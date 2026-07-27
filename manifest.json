@@ -8,9 +8,9 @@
   "theme_color": "#ff7a00",
   "orientation": "portrait-primary",
   "icons": [
-    { "src": "hero/Ao vivo.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "hero/Ao vivo.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "hero/Ao vivo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "hero/icon-pwa.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "hero/icon-pwa.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "hero/icon-pwa.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "categories": ["sports", "entertainment"]
 }

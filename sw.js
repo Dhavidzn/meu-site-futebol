@@ -6,6 +6,7 @@ const ASSETS = [
   '/script.js',
   '/manifest.json',
   '/hero/Ao vivo.png',
+  '/hero/icon-pwa.png',
   '/hero/Libertadores.png',
   '/hero/Champions.png',
   '/hero/Premier league.png',

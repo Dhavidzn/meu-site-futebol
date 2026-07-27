@@ -821,6 +821,7 @@ body {
   color: rgba(255, 255, 255, .5);
   text-decoration: none;
   border-radius: .5rem;
+  cursor: pointer;
   transition: background .15s, color .15s;
 }
 

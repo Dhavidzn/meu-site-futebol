@@ -109,18 +109,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchResults = document.getElementById('searchResults');
 
   const searchables = [
-    { label: 'Brasileirão Série A', type: 'campeonato' },
-    { label: 'Brasileirão Série B', type: 'campeonato' },
-    { label: 'Premier League', type: 'campeonato' },
-    { label: 'Champions League', type: 'campeonato' },
-    { label: 'La Liga', type: 'campeonato' },
-    { label: 'Copa Libertadores', type: 'campeonato' },
-    { label: 'Copa Sul-Americana', type: 'campeonato' },
-    { label: 'Copa do Brasil', type: 'campeonato' },
-    { label: 'Ao vivo', type: 'seção' },
-    { label: 'Competições', type: 'seção' },
-    { label: 'Sobre', type: 'seção' }
+    { label: 'Brasileirão Série A', type: 'campeonato', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Brasileirão Série B', type: 'campeonato', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Premier League', type: 'campeonato', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Champions League', type: 'campeonato', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'La Liga', type: 'campeonato', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Copa Libertadores', type: 'campeonato', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Copa Sul-Americana', type: 'campeonato', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Copa do Brasil', type: 'campeonato', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Ao vivo', type: 'seção', action: () => document.getElementById('live')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Competições', type: 'seção', action: () => document.getElementById('competitions')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: 'Sobre', type: 'seção', action: () => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' }) }
   ];
+
+  if (typeof gameMeta !== 'undefined') {
+    Object.keys(gameMeta).forEach(key => {
+      const g = gameMeta[key];
+      if (g && g.name) {
+        searchables.push({
+          label: g.name + (g.time ? ' — ' + g.date + ' ' + g.time : ''),
+          type: 'jogo',
+          action: () => {
+            if (typeof games !== 'undefined' && games[key]) openPlayer(key);
+            else document.getElementById('live')?.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
+    });
+  }
 
   function openSearch() {
     searchOverlay.classList.add('active');
@@ -137,9 +153,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const q = query.toLowerCase().trim();
     if (!q) { searchResults.innerHTML = ''; return; }
     const matches = searchables.filter(s => s.label.toLowerCase().includes(q));
-    searchResults.innerHTML = matches.map(m =>
-      '<div class="search-result-item"><span class="sr-day">' + m.type + '</span>' + m.label + '</div>'
+    searchResults.innerHTML = matches.map((m, i) =>
+      '<div class="search-result-item" data-idx="' + i + '"><span class="sr-day">' + m.type + '</span>' + m.label + '</div>'
     ).join('') || '<div class="search-result-item" style="color:rgba(255,255,255,.2)">Nenhum resultado</div>';
+
+    searchResults.querySelectorAll('.search-result-item[data-idx]').forEach(el => {
+      el.addEventListener('click', () => {
+        const idx = parseInt(el.getAttribute('data-idx'));
+        if (matches[idx] && matches[idx].action) {
+          closeSearch();
+          matches[idx].action();
+        }
+      });
+    });
   }
 
   if (searchBtn) searchBtn.addEventListener('click', openSearch);

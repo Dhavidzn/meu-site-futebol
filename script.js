@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const half = cards.length / 2;
       const cardW = cards[0].offsetWidth;
       const gap = parseInt(getComputedStyle(track).gap) || 24;
-      const offset = half * cardW + (half - 1) * gap;
+      const offset = half * cardW + half * gap;
       track.style.setProperty('--carousel-offset', '-' + offset + 'px');
     }
 

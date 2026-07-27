@@ -1,8 +1,10 @@
 {
+  "id": "/",
   "name": "Futebol Todo Dia — Assistir Futebol Ao Vivo",
   "short_name": "Futebol Todo Dia",
   "description": "Assista futebol ao vivo em HD, acompanhe os principais campeonatos com transmissão rápida e sem travamentos.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#ff7a00",

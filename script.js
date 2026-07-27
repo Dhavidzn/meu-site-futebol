@@ -188,27 +188,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let deferredPrompt = null;
   const installBtn = document.getElementById('installBtn');
+  const btnInstall = document.getElementById('btnInstall');
+  const installBanner = document.getElementById('installBanner');
 
   window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
     deferredPrompt = e;
     if (installBtn) installBtn.classList.remove('hidden');
+    if (installBanner) installBanner.classList.remove('hidden');
   });
 
-  if (installBtn) {
-    installBtn.addEventListener('click', () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(r => {
-        deferredPrompt = null;
-        installBtn.classList.add('hidden');
-      });
+  function runInstall() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      if (installBtn) installBtn.classList.add('hidden');
+      if (installBanner) installBanner.classList.add('hidden');
     });
   }
+
+  if (installBtn) installBtn.addEventListener('click', runInstall);
+  if (btnInstall) btnInstall.addEventListener('click', runInstall);
 
   window.addEventListener('appinstalled', () => {
     deferredPrompt = null;
     if (installBtn) installBtn.classList.add('hidden');
+    if (installBanner) installBanner.classList.add('hidden');
   });
 
 });

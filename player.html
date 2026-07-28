@@ -168,6 +168,60 @@
       box-shadow: 0 0 60px rgba(229, 57, 53, .55);
     }
 
+    .fs-btn {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 10;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: .5rem;
+      background: rgba(0,0,0,.6);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, transform .15s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .fs-btn:hover {
+      background: rgba(0,0,0,.8);
+    }
+
+    .fs-btn:active {
+      transform: scale(.92);
+    }
+
+    .player-wrap:-webkit-full-screen {
+      width: 100vw;
+      height: 100vh;
+      padding-top: 0;
+    }
+
+    .player-wrap:-moz-full-screen {
+      width: 100vw;
+      height: 100vh;
+      padding-top: 0;
+    }
+
+    .player-wrap:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      padding-top: 0;
+    }
+
+    .player-wrap:-webkit-full-screen iframe,
+    .player-wrap:-moz-full-screen iframe,
+    .player-wrap:fullscreen iframe {
+      width: 100%;
+      height: 100%;
+    }
+
     #adGate {
       display: none;
       position: absolute;
@@ -248,6 +302,14 @@
       #adGate {
         border-radius: .75rem;
       }
+
+      .fs-btn {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.5rem;
+        bottom: .75rem;
+        right: .75rem;
+      }
     }
 
     @media (min-width: 1280px) {
@@ -306,6 +368,7 @@
             <span style="color:#fff;font-size:1.75rem;margin-left:.2rem;">&#9654;</span>
           </div>
         </div>
+        <button class="fs-btn" id="fsBtn" onclick="toggleFullscreen()" title="Tela cheia">⛶</button>
       </div>
     </div>
 
@@ -367,6 +430,31 @@
       src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
       iframe.onload = function () { spinner.classList.remove('active'); };
       iframe.src = src;
+    }
+
+    function toggleFullscreen() {
+      var el = document.getElementById('playerWrap');
+      if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) {
+        if (el.requestFullscreen) {
+          el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen) {
+          el.webkitRequestFullscreen();
+        } else if (el.mozRequestFullScreen) {
+          el.mozRequestFullScreen();
+        } else if (el.msRequestFullscreen) {
+          el.msRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
     }
 
     function watchAd() {

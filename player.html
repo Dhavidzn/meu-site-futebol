@@ -376,22 +376,16 @@
 
   <script>
     var games = {
-      'Segunda — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=disneyplus1',
-      'Segunda — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=espn',
-      'Segunda — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=disneyplus2',
-      'Terça — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=espn4',
-      'Terça — Jogo 2': 'https://embedcanaisdetv.xyz/e/index.php?canal=disneyplus02',
-      'Terça — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=espn4',
-      'Terça — Jogo 4': 'https://embedcanaisdetv.xyz/e/index.php?canal=paramountplus',
+
       'Quarta — Jogo 1': 'https://embedcanaisdetv.xyz/e/index.php?canal=amazonprimevideo',
       'Quarta — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere4',
       'Quarta — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=premiere2',
       'Quarta — Jogo 4': 'https://sinalpublicoetv.vercel.app/?id=globosp',
       'Quarta — Jogo 5': 'https://sinalpublicoetv.vercel.app/?id=espn',
       'Quarta — Jogo 6': 'https://embedcanaisdetv.xyz/e/index.php?canal=paramountplus',
-      'Quinta — Jogo 1': '',
-      'Quinta — Jogo 2': '',
-      'Quinta — Jogo 3': '',
+      'Quinta — Jogo 1': 'https://embedcanaisdetv.xyz/e/index.php?canal=paramountplus',
+      'Quinta — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere',
+      'Quinta — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=premiere2',
       'Sábado — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=primevideo',
       'Sábado — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere',
       'Sábado — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=globorj',
@@ -407,6 +401,11 @@
 
     document.getElementById('gameTitle').textContent = jogoKey;
 
+    /* ========================================
+       TV detection — redirect instead of iframe
+       ======================================== */
+    var isTV = /(SMART-TV|Tizen|Web0S|NetCast|SonyTV|Opera TV|DTV|CrKey|AFT)/i.test(navigator.userAgent);
+
     var adWatched = false;
 
     document.getElementById('adGate').classList.add('active');
@@ -421,13 +420,16 @@
     }
 
     function loadStream() {
+      var src = streamSrc + (streamSrc.includes('?') ? '&' : '?') + 'autoplay=1';
+      if (isTV) {
+        window.location.href = src;
+        return;
+      }
       var spinner = document.getElementById('loadingSpinner');
       var iframe = document.getElementById('playerFrame');
       var overlay = document.getElementById('playerOverlay');
       spinner.classList.add('active');
       overlay.classList.add('hidden');
-      var src = streamSrc;
-      src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
       iframe.onload = function () { spinner.classList.remove('active'); };
       iframe.src = src;
     }

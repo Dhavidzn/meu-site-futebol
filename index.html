@@ -426,22 +426,16 @@
        ADICIONE SEUS IFRAMES AQUI
        ======================================== */
     const games = {
-      'Segunda — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=disneyplus1',
-      'Segunda — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=espn',
-      'Segunda — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=disneyplus2',
-      'Terça — Jogo 1': 'https://sinalpublicoetv.vercel.app/?id=espn4',
-      'Terça — Jogo 2': 'https://embedcanaisdetv.xyz/e/index.php?canal=disneyplus02',
-      'Terça — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=espn4',
-      'Terça — Jogo 4': 'https://embedcanaisdetv.xyz/e/index.php?canal=paramountplus',
+
       'Quarta — Jogo 1': 'https://embedcanaisdetv.xyz/e/index.php?canal=amazonprimevideo',
       'Quarta — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere4',
       'Quarta — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=premiere2',
       'Quarta — Jogo 4': 'https://sinalpublicoetv.vercel.app/?id=globosp',
       'Quarta — Jogo 5': 'https://sinalpublicoetv.vercel.app/?id=espn',
       'Quarta — Jogo 6': 'https://embedcanaisdetv.xyz/e/index.php?canal=paramountplus',
-      'Quinta — Jogo 1': '',
-      'Quinta — Jogo 2': '',
-      'Quinta — Jogo 3': '',
+      'Quinta — Jogo 1': 'https://embedcanaisdetv.xyz/e/index.php?canal=paramountplus',
+      'Quinta — Jogo 2': 'https://sinalpublicoetv.vercel.app/?id=premiere',
+      'Quinta — Jogo 3': 'https://sinalpublicoetv.vercel.app/?id=premiere2',
       'Sábado — Jogo 1': '',
       'Sábado — Jogo 2': '',
       'Sábado — Jogo 3': '',
@@ -455,13 +449,7 @@
        ADICIONE AS IMAGENS DOS JOGOS AQUI
        ======================================== */
     const gameImages = {
-      'Segunda — Jogo 1': 'imagens/11.webp',
-      'Segunda — Jogo 2': 'imagens/12.webp',
-      'Segunda — Jogo 3': 'imagens/13.webp',
-      'Terça — Jogo 1': 'imagens/14.webp',
-      'Terça — Jogo 2': 'imagens/15.webp',
-      'Terça — Jogo 3': 'imagens/16.webp',
-      'Terça — Jogo 4': 'imagens/21.webp',
+
       'Quarta — Jogo 1': 'imagens/17.webp',
       'Quarta — Jogo 2': 'imagens/18.webp',
       'Quarta — Jogo 3': 'imagens/19.webp',
@@ -481,13 +469,7 @@
     };
 
     const gameMeta = {
-      'Segunda — Jogo 1': { name: 'Atlético-GO x Operário', date: '27/07', time: '19:30', comp: 'Brasileirão Série B' },
-      'Segunda — Jogo 2': { name: 'CRB x Vila Nova', date: '27/07', time: '19:30', comp: 'Brasileirão Série B' },
-      'Segunda — Jogo 3': { name: 'Sport Recife x Cuiabá', date: '27/07', time: '19:30', comp: 'Brasileirão Série B' },
-      'Terça — Jogo 1': { name: 'Juventude x Avaí', date: '28/07', time: '19:30', comp: 'Brasileirão Série B' },
-      'Terça — Jogo 2': { name: 'Ponte Preta x Athletic', date: '28/07', time: '19:30', comp: 'Brasileirão Série B' },
-      'Terça — Jogo 3': { name: 'Fortaleza x Botafogo-SP', date: '28/07', time: '21:45', comp: 'Brasileirão Série B' },
-      'Terça — Jogo 4': { name: 'Santos x Universidad de Venezuela', date: '28/07', time: '21:30', comp: 'Copa Sul-Americana' },
+
       'Quarta — Jogo 1': { name: 'Internacional x Flamengo', date: '29/07', time: '19:30', comp: 'Brasileirão Série A' },
       'Quarta — Jogo 2': { name: 'Mirassol x Remo', date: '29/07', time: '19:30', comp: 'Brasileirão Série A' },
       'Quarta — Jogo 3': { name: 'Fluminense x Bahia', date: '29/07', time: '21:30', comp: 'Brasileirão Série A' },
@@ -527,6 +509,16 @@
           result.push(dayNames[dayOrder[(today + i) % 7]]);
         }
         return result;
+      }
+
+      function isGameExpired(meta) {
+        if (!meta || !meta.date) return false;
+        var parts = meta.date.split('/');
+        if (parts.length !== 2) return false;
+        var d = parseInt(parts[0], 10), m = parseInt(parts[1], 10);
+        if (!d || !m) return false;
+        var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        return new Date(now.getFullYear(), m - 1, d) < today;
       }
 
       function gameKey(dayName, j) {
@@ -647,6 +639,7 @@
           for (var j = 1; j <= count; j++) {
             var k = gameKey(dayName, j);
             if (!games[k] && !gameImages[k]) continue;
+            if (isGameExpired(gameMeta[k])) continue;
             var slotData = buildSlotHTML(k, dayName);
             if (slotData.status === 'live') liveGames.push(slotData);
             else if (slotData.status === 'finished') finishedGames.push(slotData);

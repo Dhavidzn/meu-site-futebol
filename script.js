@@ -3,15 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ========================================
      CAROUSEL — imagens da pasta /hero/
      ======================================== */
+  const BASE = window.__BASE_PATH__ || '';
   const carouselImages = [
-    { src: 'hero/Libertadores.webp',       alt: 'Copa Libertadores' },
-    { src: 'hero/Champions.webp',          alt: 'Champions League' },
-    { src: 'hero/Premier league.webp',     alt: 'Premier League' },
-    { src: 'hero/Brasileirão série a.webp', alt: 'Brasileirão Série A' },
-    { src: 'hero/Laliga.webp',             alt: 'La Liga' },
-    { src: 'hero/Brasileirão série b.webp', alt: 'Brasileirão Série B' },
-    { src: 'hero/Sulamericana.webp',       alt: 'Copa Sul-Americana' },
-    { src: 'hero/Copa do brasil.webp',     alt: 'Copa do Brasil' }
+    { src: BASE + 'hero/Libertadores.webp',       alt: 'Copa Libertadores' },
+    { src: BASE + 'hero/Champions.webp',          alt: 'Champions League' },
+    { src: BASE + 'hero/Premier league.webp',     alt: 'Premier League' },
+    { src: BASE + 'hero/Brasileirão série a.webp', alt: 'Brasileirão Série A' },
+    { src: BASE + 'hero/Laliga.webp',             alt: 'La Liga' },
+    { src: BASE + 'hero/Brasileirão série b.webp', alt: 'Brasileirão Série B' },
+    { src: BASE + 'hero/Sulamericana.webp',       alt: 'Copa Sul-Americana' },
+    { src: BASE + 'hero/Copa do brasil.webp',     alt: 'Copa do Brasil' }
   ];
 
   const track = document.getElementById('carouselTrack');

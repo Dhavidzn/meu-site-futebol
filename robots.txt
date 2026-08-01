@@ -3,3 +3,4 @@ Allow: /
 Disallow: /google*.html
 
 Sitemap: https://futeboltododia.vercel.app/sitemap.xml
+Sitemap: https://futeboltododia.vercel.app/sitemap-principal.xml

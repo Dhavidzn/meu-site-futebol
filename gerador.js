@@ -713,8 +713,10 @@ function run() {
   });
 
   /* 2. Sitemap */
-  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), renderSitemap(), 'utf8');
-  console.log('Gerado: sitemap.xml');
+  const sitemapXml = renderSitemap();
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapXml, 'utf8');
+  fs.writeFileSync(path.join(ROOT, 'sitemap-principal.xml'), sitemapXml, 'utf8');
+  console.log('Gerado: sitemap.xml (+ sitemap-principal.xml)');
 
   /* 3. index.html */
   const pageMap = {};

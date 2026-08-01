@@ -698,6 +698,12 @@ function renderAtomSitemap() {
     body + '</feed>\n';
 }
 
+function renderTextSitemap() {
+  const urls = [baseUrl];
+  Object.keys(games).forEach(key => { urls.push(baseUrl + '/jogos/' + slugFor(key) + '.html'); });
+  return urls.join('\n') + '\n';
+}
+
 /* ----------------------------------------------------------
    Injeção de dados em index.html e player.html
    ---------------------------------------------------------- */
@@ -731,7 +737,8 @@ function run() {
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapXml, 'utf8');
   fs.writeFileSync(path.join(ROOT, 'sitemap-principal.xml'), sitemapXml, 'utf8');
   fs.writeFileSync(path.join(ROOT, 'sitemap-atom.xml'), renderAtomSitemap(), 'utf8');
-  console.log('Gerado: sitemap.xml (+ sitemap-principal.xml + sitemap-atom.xml)');
+  fs.writeFileSync(path.join(ROOT, 'sitemap.txt'), renderTextSitemap(), 'utf8');
+  console.log('Gerado: sitemap.xml (+ sitemap-principal.xml + sitemap-atom.xml + sitemap.txt)');
 
   /* 3. index.html */
   const pageMap = {};

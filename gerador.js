@@ -174,6 +174,7 @@ function renderGamePage(key) {
   <meta property="og:url" content="${canonical}" />
   <meta property="og:image" content="${ogImage}" />
   <link rel="manifest" href="../manifest.json" />
+  <meta name="google-site-verification" content="3uKwHA9zdvdntZ8tE2uO928Gsc3oMjpyEf05S2GKuBk" />
   <meta name="theme-color" content="#ff7a00" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

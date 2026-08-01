@@ -738,7 +738,8 @@ function run() {
   fs.writeFileSync(path.join(ROOT, 'sitemap-principal.xml'), sitemapXml, 'utf8');
   fs.writeFileSync(path.join(ROOT, 'sitemap-atom.xml'), renderAtomSitemap(), 'utf8');
   fs.writeFileSync(path.join(ROOT, 'sitemap.txt'), renderTextSitemap(), 'utf8');
-  console.log('Gerado: sitemap.xml (+ sitemap-principal.xml + sitemap-atom.xml + sitemap.txt)');
+  fs.writeFileSync(path.join(ROOT, 'sitemap-novo.txt'), renderTextSitemap(), 'utf8');
+  console.log('Gerado: sitemap.xml (+ sitemap-principal.xml + sitemap-atom.xml + sitemap.txt + sitemap-novo.txt)');
 
   /* 3. index.html */
   const pageMap = {};

@@ -2,6 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /google*.html
 
+Sitemap: https://futeboltododia.vercel.app/sitemap.txt
+Sitemap: https://futeboltododia.vercel.app/sitemap-novo.txt
 Sitemap: https://futeboltododia.vercel.app/sitemap.xml
 Sitemap: https://futeboltododia.vercel.app/sitemap-principal.xml
 Sitemap: https://futeboltododia.vercel.app/sitemap-atom.xml

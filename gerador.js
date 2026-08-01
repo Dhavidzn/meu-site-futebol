@@ -673,7 +673,7 @@ function renderGamePage(key) {
 }
 
 /* ----------------------------------------------------------
-   Sitemap
+   Sitemap (XML padrão + Atom 1.0)
    ---------------------------------------------------------- */
 function renderSitemap() {
   const urls = ['<url>\n    <loc>' + baseUrl + '</loc>\n    <lastmod>' + lastmod + '</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>'];
@@ -682,6 +682,20 @@ function renderSitemap() {
   });
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  ' +
     urls.join('\n  ') + '\n</urlset>\n';
+}
+
+function renderAtomSitemap() {
+  const now = today.toISOString();
+  let body = '';
+  Object.keys(games).forEach(key => {
+    const meta = gameMeta[key] || {};
+    const url = baseUrl + '/jogos/' + slugFor(key) + '.html';
+    body += '  <entry>\n    <title>' + esc(meta.name || key) + ' ao vivo</title>\n' +
+      '    <link href="' + url + '"/>\n    <id>' + url + '</id>\n    <updated>' + now + '</updated>\n  </entry>\n';
+  });
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n' +
+    '  <title>Futebol Todo Dia - Jogos</title>\n  <updated>' + now + '</updated>\n' +
+    body + '</feed>\n';
 }
 
 /* ----------------------------------------------------------
@@ -716,7 +730,8 @@ function run() {
   const sitemapXml = renderSitemap();
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapXml, 'utf8');
   fs.writeFileSync(path.join(ROOT, 'sitemap-principal.xml'), sitemapXml, 'utf8');
-  console.log('Gerado: sitemap.xml (+ sitemap-principal.xml)');
+  fs.writeFileSync(path.join(ROOT, 'sitemap-atom.xml'), renderAtomSitemap(), 'utf8');
+  console.log('Gerado: sitemap.xml (+ sitemap-principal.xml + sitemap-atom.xml)');
 
   /* 3. index.html */
   const pageMap = {};

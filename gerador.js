@@ -684,26 +684,6 @@ function renderSitemap() {
     urls.join('\n  ') + '\n</urlset>\n';
 }
 
-function renderAtomSitemap() {
-  const now = today.toISOString();
-  let body = '';
-  Object.keys(games).forEach(key => {
-    const meta = gameMeta[key] || {};
-    const url = baseUrl + '/jogos/' + slugFor(key) + '.html';
-    body += '  <entry>\n    <title>' + esc(meta.name || key) + ' ao vivo</title>\n' +
-      '    <link href="' + url + '"/>\n    <id>' + url + '</id>\n    <updated>' + now + '</updated>\n  </entry>\n';
-  });
-  return '<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n' +
-    '  <title>Futebol Todo Dia - Jogos</title>\n  <updated>' + now + '</updated>\n' +
-    body + '</feed>\n';
-}
-
-function renderTextSitemap() {
-  const urls = [baseUrl];
-  Object.keys(games).forEach(key => { urls.push(baseUrl + '/jogos/' + slugFor(key) + '.html'); });
-  return urls.join('\n') + '\n';
-}
-
 /* ----------------------------------------------------------
    Injeção de dados em index.html e player.html
    ---------------------------------------------------------- */
@@ -735,11 +715,7 @@ function run() {
   /* 2. Sitemap */
   const sitemapXml = renderSitemap();
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapXml, 'utf8');
-  fs.writeFileSync(path.join(ROOT, 'sitemap-principal.xml'), sitemapXml, 'utf8');
-  fs.writeFileSync(path.join(ROOT, 'sitemap-atom.xml'), renderAtomSitemap(), 'utf8');
-  fs.writeFileSync(path.join(ROOT, 'sitemap.txt'), renderTextSitemap(), 'utf8');
-  fs.writeFileSync(path.join(ROOT, 'sitemap-novo.txt'), renderTextSitemap(), 'utf8');
-  console.log('Gerado: sitemap.xml (+ sitemap-principal.xml + sitemap-atom.xml + sitemap.txt + sitemap-novo.txt)');
+  console.log('Gerado: sitemap.xml');
 
   /* 3. index.html */
   const pageMap = {};

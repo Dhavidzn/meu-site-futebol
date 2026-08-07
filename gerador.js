@@ -4,7 +4,7 @@
    Gera:
    - /jogos/<slug>.html  → página própria de cada jogo (hero + player + texto SEO)
    - /sitemap.xml        → sitemap com a URL de cada jogo
-   - injeta dados atualizados em index.html e player.html
+   - injeta dados atualizados em home.html e player.html
 
    COMO USAR:
    1. Edite data/jogos.json (iframes, imagens, meta dos jogos)
@@ -435,7 +435,7 @@ function renderGamePage(key) {
         <span></span>
         <span></span>
       </button>
-      <a href="../index.html" class="hero-logo-link">
+      <a href="../home.html" class="hero-logo-link">
         <img src="../hero/Ao vivo.webp" alt="Futebol Todo Dia" class="hero-logo">
       </a>
       <button class="hero-search" id="searchBtn" aria-label="Pesquisar">
@@ -459,10 +459,10 @@ function renderGamePage(key) {
         </svg>
       </button>
     </div>
-    <a href="../index.html" class="side-menu-link">Jogos ao vivo</a>
+    <a href="../home.html" class="side-menu-link">Jogos ao vivo</a>
     <a href="#assistir" class="side-menu-link">Assistir</a>
     <a href="#jogo" class="side-menu-link">Sobre o jogo</a>
-    <a href="../index.html#competitions" class="side-menu-link">Competições</a>
+    <a href="../home.html#competitions" class="side-menu-link">Competições</a>
     <div class="side-menu-divider"></div>
   </nav>
 
@@ -512,7 +512,7 @@ function renderGamePage(key) {
           </div>
           <p style="font-size:.8125rem;color:rgba(255,255,255,.38);">${date} &bull; ${time} &bull; Transmissão grátis em HD</p>
         </div>
-        <a href="../index.html" style="font-size:.8125rem;color:rgba(255,255,255,.55);text-decoration:none;font-weight:600;">&larr; Ver todos os jogos</a>
+        <a href="../home.html" style="font-size:.8125rem;color:rgba(255,255,255,.55);text-decoration:none;font-weight:600;">&larr; Ver todos os jogos</a>
       </div>
 
       <div class="player-card">
@@ -568,7 +568,7 @@ function renderGamePage(key) {
         <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
           ${related}
         </div>
-        <p style="margin-top:1.25rem;"><a href="../index.html" style="font-size:.875rem;font-weight:700;color:#E53935;text-decoration:none;">Ver todos os jogos ao vivo &rarr;</a></p>
+        <p style="margin-top:1.25rem;"><a href="../home.html" style="font-size:.875rem;font-weight:700;color:#E53935;text-decoration:none;">Ver todos os jogos ao vivo &rarr;</a></p>
       </div>
 
     </div>
@@ -685,7 +685,7 @@ function renderSitemap() {
 }
 
 /* ----------------------------------------------------------
-   Injeção de dados em index.html e player.html
+   Injeção de dados em home.html e player.html
    ---------------------------------------------------------- */
 function jsonBlock(keyword, varName, obj) {
   return '    ' + keyword + ' ' + varName + ' = ' + JSON.stringify(obj, null, 2) + ';';
@@ -717,14 +717,14 @@ function run() {
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapXml, 'utf8');
   console.log('Gerado: sitemap.xml');
 
-  /* 3. index.html */
+  /* 3. home.html */
   const pageMap = {};
   Object.keys(games).forEach(key => { pageMap[key] = 'jogos/' + slugs[key] + '.html'; });
-  injectBetween(path.join(ROOT, 'index.html'), 'GERADOR:DATA_START', 'GERADOR:DATA_END', jsonBlock('const', 'games', games));
-  injectBetween(path.join(ROOT, 'index.html'), 'GERADOR:IMAGES_START', 'GERADOR:IMAGES_END', jsonBlock('const', 'gameImages', gameImages));
-  injectBetween(path.join(ROOT, 'index.html'), 'GERADOR:META_START', 'GERADOR:META_END', jsonBlock('const', 'gameMeta', gameMeta));
-  injectBetween(path.join(ROOT, 'index.html'), 'GERADOR:PAGES_START', 'GERADOR:PAGES_END', jsonBlock('const', 'gamePages', pageMap));
-  console.log('Atualizado: index.html');
+  injectBetween(path.join(ROOT, 'home.html'), 'GERADOR:DATA_START', 'GERADOR:DATA_END', jsonBlock('const', 'games', games));
+  injectBetween(path.join(ROOT, 'home.html'), 'GERADOR:IMAGES_START', 'GERADOR:IMAGES_END', jsonBlock('const', 'gameImages', gameImages));
+  injectBetween(path.join(ROOT, 'home.html'), 'GERADOR:META_START', 'GERADOR:META_END', jsonBlock('const', 'gameMeta', gameMeta));
+  injectBetween(path.join(ROOT, 'home.html'), 'GERADOR:PAGES_START', 'GERADOR:PAGES_END', jsonBlock('const', 'gamePages', pageMap));
+  console.log('Atualizado: home.html');
 
   /* 4. player.html */
   injectBetween(path.join(ROOT, 'player.html'), 'GERADOR:DATA_START', 'GERADOR:DATA_END', jsonBlock('var', 'games', games));

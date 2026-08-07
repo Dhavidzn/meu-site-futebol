@@ -3,8 +3,23 @@
   "outputDirectory": "./",
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/home.html"
+    },
+    {
+      "source": "/home",
+      "destination": "/home.html"
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/home",
+      "permanent": true
     }
   ],
   "headers": [

@@ -7,25 +7,37 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://futeboltododia.vercel.app/jogos/gremio-x-sao-paulo-08-08.html</loc>
+    <loc>https://futeboltododia.vercel.app/jogos/cruzeiro-x-mirassol-09-08.html</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://futeboltododia.vercel.app/jogos/remo-x-atletico-mg-08-08.html</loc>
+    <loc>https://futeboltododia.vercel.app/jogos/bahia-x-vasco-09-08.html</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://futeboltododia.vercel.app/jogos/coritiba-x-chapecoense-08-08.html</loc>
+    <loc>https://futeboltododia.vercel.app/jogos/palmeiras-x-internacional-09-08.html</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://futeboltododia.vercel.app/jogos/botafogo-x-fluminense-08-08.html</loc>
+    <loc>https://futeboltododia.vercel.app/jogos/bragantino-x-corinthians-09-08.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://futeboltododia.vercel.app/jogos/santos-x-athletico-pr-09-08.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://futeboltododia.vercel.app/jogos/flamengo-x-vitoria-09-08.html</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>

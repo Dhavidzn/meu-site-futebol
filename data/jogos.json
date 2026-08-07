@@ -7,10 +7,10 @@
     "Sábado — Jogo 4": "https://sinalpublicoetv.vercel.app/?id=sportv"
   },
   "gameImages": {
-    "Sábado — Jogo 1": "imagens/Football_match_poster_Grêmio_São…_202608071629.jpeg",
-    "Sábado — Jogo 2": "imagens/Football_match_poster_Remo_Atlético_202608071629.jpeg",
-    "Sábado — Jogo 3": "imagens/Football_match_poster_Coritiba_C…_202608071629.jpeg",
-    "Sábado — Jogo 4": "imagens/Botafogo_and_Fluminense_match_po…_202608071629.jpeg"
+    "Sábado — Jogo 1": "imagens/gremio-x-sao-paulo-08-08.webp",
+    "Sábado — Jogo 2": "imagens/remo-x-atletico-mg-08-08.webp",
+    "Sábado — Jogo 3": "imagens/coritiba-x-chapecoense-08-08.webp",
+    "Sábado — Jogo 4": "imagens/botafogo-x-fluminense-08-08.webp"
   },
   "gameMeta": {
     "Sábado — Jogo 1": { "name": "Grêmio x São Paulo", "date": "08/08", "time": "16:00", "comp": "Brasileirão Série A" },
